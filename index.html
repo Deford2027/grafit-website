@@ -1,0 +1,1017 @@
+<title>GRAFIT Service</title>
+<meta name="claude:viewport-fit-sides" content="cover">
+<link rel="stylesheet" href="https://fonts.googleapis.com/css2?family=Inter:wght@400;500;600;700;800;900&family=Space+Grotesk:wght@400;500;600;700&display=swap">
+
+<style>
+/* Layout: full-width hero with overlapping feature strip, card grid sections, orange CTA band */
+:root {
+  --bg: #ffffff;
+  --bg-alt: #f4f4f4;
+  --fg: #1a1a1a;
+  --fg-muted: #6b6b6b;
+  --fg-light: #9a9a9a;
+  --accent: #F5922A;
+  --accent-hover: #e07d15;
+  --card-bg: #ffffff;
+  --card-border: #e8e8e8;
+  --hero-bg: #111111;
+  --hero-fg: #ffffff;
+  --header-bg: #ffffff;
+  --header-border: #e8e8e8;
+  --overlay: rgba(0,0,0,0.55);
+  --feature-overlay: rgba(0,0,0,0.6);
+  --brand-card-bg: #f8f8f8;
+  --font-display: 'Space Grotesk', sans-serif;
+  --font-body: 'Inter', sans-serif;
+}
+
+@media (prefers-color-scheme: dark) {
+  :root:not([data-theme="light"]) {
+    --bg: #0f0f0f;
+    --bg-alt: #1a1a1a;
+    --fg: #e8e8e8;
+    --fg-muted: #999999;
+    --fg-light: #666666;
+    --card-bg: #1e1e1e;
+    --card-border: #2a2a2a;
+    --hero-bg: #080808;
+    --header-bg: #141414;
+    --header-border: #222222;
+    --overlay: rgba(0,0,0,0.65);
+    --feature-overlay: rgba(0,0,0,0.7);
+    --brand-card-bg: #1a1a1a;
+    color-scheme: dark;
+  }
+}
+:root[data-theme="dark"] {
+  --bg: #0f0f0f;
+  --bg-alt: #1a1a1a;
+  --fg: #e8e8e8;
+  --fg-muted: #999999;
+  --fg-light: #666666;
+  --card-bg: #1e1e1e;
+  --card-border: #2a2a2a;
+  --hero-bg: #080808;
+  --header-bg: #141414;
+  --header-border: #222222;
+  --overlay: rgba(0,0,0,0.65);
+  --feature-overlay: rgba(0,0,0,0.7);
+  --brand-card-bg: #1a1a1a;
+  color-scheme: dark;
+}
+
+* { margin: 0; padding: 0; box-sizing: border-box; }
+body {
+  background: var(--bg);
+  color: var(--fg);
+  font-family: var(--font-body);
+  line-height: 1.6;
+  -webkit-font-smoothing: antialiased;
+}
+
+/* Header */
+.header {
+  position: sticky;
+  top: env(safe-area-inset-top, 0px);
+  z-index: 100;
+  background: var(--header-bg);
+  border-bottom: 1px solid var(--header-border);
+}
+body::before {
+  content: "";
+  position: fixed;
+  inset: 0 0 auto;
+  height: env(safe-area-inset-top, 0px);
+  z-index: 101;
+  background: var(--header-bg);
+}
+.header-inner {
+  max-width: 1280px;
+  margin: 0 auto;
+  display: flex;
+  align-items: center;
+  justify-content: space-between;
+  padding-block: 14px;
+  padding-left: max(16px, env(safe-area-inset-left, 0px));
+  padding-right: max(16px, env(safe-area-inset-right, 0px));
+  gap: 16px;
+}
+.logo {
+  font-family: var(--font-display);
+  font-weight: 700;
+  font-size: 22px;
+  letter-spacing: 6px;
+  text-transform: uppercase;
+  color: var(--fg);
+  text-decoration: none;
+  flex-shrink: 0;
+}
+.search-box {
+  display: flex;
+  align-items: center;
+  background: var(--bg-alt);
+  border-radius: 24px;
+  padding: 8px 16px;
+  gap: 8px;
+  flex: 0 1 280px;
+  min-width: 0;
+}
+.search-box svg { flex-shrink: 0; color: var(--fg-light); }
+.search-box input {
+  border: none;
+  background: transparent;
+  font-family: var(--font-body);
+  font-size: 14px;
+  color: var(--fg);
+  outline: none;
+  width: 100%;
+  min-width: 0;
+}
+.search-box input::placeholder { color: var(--fg-light); }
+.header-right {
+  display: flex;
+  align-items: center;
+  gap: 20px;
+  flex-shrink: 0;
+}
+.header-phone {
+  display: flex;
+  align-items: center;
+  gap: 8px;
+  color: var(--fg);
+  text-decoration: none;
+  font-size: 15px;
+  font-weight: 500;
+  white-space: nowrap;
+}
+.header-phone svg { color: var(--accent); }
+.header-icons {
+  display: flex;
+  gap: 12px;
+  align-items: center;
+}
+.header-icons a {
+  color: var(--fg);
+  display: flex;
+  align-items: center;
+  transition: color 0.2s;
+}
+.header-icons a:hover { color: var(--accent); }
+.menu-btn {
+  display: flex;
+  align-items: center;
+  gap: 8px;
+  background: transparent;
+  border: 1px solid var(--card-border);
+  border-radius: 8px;
+  padding: 8px 16px;
+  font-family: var(--font-body);
+  font-size: 14px;
+  font-weight: 500;
+  color: var(--fg);
+  cursor: pointer;
+  transition: background 0.2s;
+}
+.menu-btn:hover { background: var(--bg-alt); }
+
+/* Hero */
+.hero {
+  position: relative;
+  background: var(--hero-bg);
+  overflow: hidden;
+}
+.hero-bg {
+  position: absolute;
+  inset: 0;
+  background: url('data:image/svg+xml,<svg xmlns="http://www.w3.org/2000/svg" width="1920" height="800"><rect fill="%23222"/><text x="960" y="400" text-anchor="middle" fill="%23333" font-size="40">GRAFIT SERVICE</text></svg>') center/cover;
+  filter: brightness(0.4);
+}
+.hero-content {
+  position: relative;
+  max-width: 1280px;
+  margin: 0 auto;
+  padding-block: 100px 160px;
+  padding-left: max(16px, env(safe-area-inset-left, 0px));
+  padding-right: max(16px, env(safe-area-inset-right, 0px));
+}
+.hero h1 {
+  font-family: var(--font-display);
+  font-size: clamp(32px, 5vw, 52px);
+  font-weight: 800;
+  color: var(--hero-fg);
+  line-height: 1.15;
+  max-width: 580px;
+  text-wrap: balance;
+  margin-bottom: 20px;
+}
+.hero-sub {
+  font-size: 16px;
+  color: rgba(255,255,255,0.7);
+  max-width: 400px;
+  line-height: 1.6;
+  margin-bottom: 36px;
+}
+.btn-primary {
+  display: inline-flex;
+  align-items: center;
+  gap: 8px;
+  background: var(--accent);
+  color: #fff;
+  border: none;
+  border-radius: 12px;
+  padding: 16px 32px;
+  font-family: var(--font-body);
+  font-size: 16px;
+  font-weight: 600;
+  cursor: pointer;
+  text-decoration: none;
+  transition: background 0.2s, transform 0.15s;
+}
+.btn-primary:hover { background: var(--accent-hover); transform: translateY(-1px); }
+.btn-primary svg { transition: transform 0.2s; }
+.btn-primary:hover svg { transform: translateX(3px); }
+
+/* Features strip */
+.features-strip {
+  max-width: 1280px;
+  margin: -80px auto 0;
+  position: relative;
+  z-index: 10;
+  display: grid;
+  grid-template-columns: repeat(3, 1fr);
+  gap: 2px;
+  padding-left: max(16px, env(safe-area-inset-left, 0px));
+  padding-right: max(16px, env(safe-area-inset-right, 0px));
+}
+.feature-card {
+  position: relative;
+  border-radius: 16px;
+  overflow: hidden;
+  min-height: 200px;
+  display: flex;
+  flex-direction: column;
+  justify-content: flex-end;
+  padding: 28px;
+  background: var(--hero-bg);
+}
+.feature-card::before {
+  content: '';
+  position: absolute;
+  inset: 0;
+  background: var(--feature-overlay);
+  z-index: 1;
+}
+.feature-dot {
+  position: absolute;
+  top: 20px;
+  left: 20px;
+  width: 8px;
+  height: 8px;
+  border-radius: 50%;
+  background: var(--accent);
+  z-index: 2;
+}
+.feature-card h3 {
+  position: relative;
+  z-index: 2;
+  font-family: var(--font-display);
+  font-size: 22px;
+  font-weight: 700;
+  color: #fff;
+  margin-bottom: 6px;
+}
+.feature-card p {
+  position: relative;
+  z-index: 2;
+  font-size: 14px;
+  color: rgba(255,255,255,0.7);
+  line-height: 1.5;
+}
+
+/* Sections */
+.section {
+  padding-block: 80px;
+}
+.section-inner {
+  max-width: 1280px;
+  margin: 0 auto;
+  padding-left: max(16px, env(safe-area-inset-left, 0px));
+  padding-right: max(16px, env(safe-area-inset-right, 0px));
+}
+.section-title {
+  font-family: var(--font-display);
+  font-size: clamp(26px, 4vw, 38px);
+  font-weight: 700;
+  line-height: 1.2;
+  text-wrap: balance;
+  margin-bottom: 48px;
+  color: var(--fg);
+}
+
+/* Service cards */
+.services-grid {
+  display: grid;
+  grid-template-columns: repeat(3, 1fr);
+  gap: 24px;
+}
+.service-card {
+  background: var(--card-bg);
+  border: 1px solid var(--card-border);
+  border-radius: 20px;
+  overflow: hidden;
+  transition: transform 0.2s, box-shadow 0.2s;
+}
+.service-card:hover { transform: translateY(-4px); box-shadow: 0 12px 40px rgba(0,0,0,0.08); }
+.service-card-top {
+  padding: 28px 28px 20px;
+  display: flex;
+  justify-content: space-between;
+  align-items: flex-start;
+}
+.service-card-top h3 {
+  font-family: var(--font-display);
+  font-size: 20px;
+  font-weight: 700;
+  line-height: 1.3;
+  color: var(--fg);
+}
+.service-arrow {
+  width: 40px;
+  height: 40px;
+  background: var(--accent);
+  border-radius: 10px;
+  display: flex;
+  align-items: center;
+  justify-content: center;
+  flex-shrink: 0;
+}
+.service-arrow svg { color: #fff; }
+.service-card-desc {
+  padding: 0 28px 20px;
+  font-size: 14px;
+  color: var(--fg-muted);
+  line-height: 1.6;
+}
+.service-card-img {
+  width: 100%;
+  aspect-ratio: 16/11;
+  object-fit: cover;
+  display: block;
+  background: var(--bg-alt);
+}
+
+/* Brands */
+.brands-grid {
+  display: grid;
+  grid-template-columns: repeat(auto-fill, minmax(140px, 1fr));
+  gap: 16px;
+}
+.brand-item {
+  display: flex;
+  flex-direction: column;
+  align-items: center;
+  justify-content: center;
+  gap: 12px;
+  padding: 24px 16px;
+  background: var(--brand-card-bg);
+  border-radius: 16px;
+  text-decoration: none;
+  color: var(--fg);
+  font-size: 13px;
+  font-weight: 600;
+  letter-spacing: 0.5px;
+  text-transform: uppercase;
+  transition: transform 0.2s, box-shadow 0.2s;
+  cursor: pointer;
+}
+.brand-item:hover { transform: translateY(-3px); box-shadow: 0 8px 24px rgba(0,0,0,0.06); }
+.brand-item img {
+  width: 48px;
+  height: 48px;
+  object-fit: contain;
+}
+
+/* Services list section */
+.services-list {
+  display: grid;
+  grid-template-columns: repeat(2, 1fr);
+  gap: 16px;
+}
+.services-list-item {
+  display: flex;
+  align-items: flex-start;
+  gap: 14px;
+  padding: 20px 24px;
+  background: var(--card-bg);
+  border: 1px solid var(--card-border);
+  border-radius: 14px;
+}
+.services-list-item .check-icon {
+  flex-shrink: 0;
+  width: 24px;
+  height: 24px;
+  background: var(--accent);
+  border-radius: 50%;
+  display: flex;
+  align-items: center;
+  justify-content: center;
+  margin-top: 2px;
+}
+.services-list-item .check-icon svg { color: #fff; width: 14px; height: 14px; }
+.services-list-item span {
+  font-size: 15px;
+  color: var(--fg);
+  line-height: 1.5;
+}
+
+/* Detailing grid */
+.detailing-grid {
+  display: grid;
+  grid-template-columns: repeat(3, 1fr);
+  gap: 20px;
+}
+.detailing-card {
+  background: var(--card-bg);
+  border: 1px solid var(--card-border);
+  border-radius: 16px;
+  padding: 28px;
+  display: flex;
+  flex-direction: column;
+  gap: 12px;
+  transition: transform 0.2s;
+}
+.detailing-card:hover { transform: translateY(-3px); }
+.detailing-card .icon-wrap {
+  width: 48px;
+  height: 48px;
+  background: rgba(245,146,42,0.1);
+  border-radius: 12px;
+  display: flex;
+  align-items: center;
+  justify-content: center;
+}
+.detailing-card .icon-wrap svg { color: var(--accent); }
+.detailing-card h4 {
+  font-family: var(--font-display);
+  font-size: 17px;
+  font-weight: 600;
+  color: var(--fg);
+}
+.detailing-card p {
+  font-size: 14px;
+  color: var(--fg-muted);
+  line-height: 1.5;
+}
+
+/* CTA Banner */
+.cta-banner {
+  background: var(--accent);
+  border-radius: 20px;
+  padding: 48px;
+  display: flex;
+  align-items: center;
+  justify-content: space-between;
+  gap: 32px;
+  flex-wrap: wrap;
+}
+.cta-banner h2 {
+  font-family: var(--font-display);
+  font-size: clamp(24px, 3.5vw, 34px);
+  font-weight: 700;
+  color: #fff;
+  text-wrap: balance;
+}
+.cta-banner p {
+  font-size: 15px;
+  color: rgba(255,255,255,0.85);
+  margin-top: 8px;
+  max-width: 420px;
+}
+.cta-right {
+  display: flex;
+  align-items: center;
+  gap: 16px;
+  flex-shrink: 0;
+}
+.cta-icon-btn {
+  width: 52px;
+  height: 52px;
+  border-radius: 14px;
+  border: 2px solid rgba(255,255,255,0.3);
+  background: transparent;
+  display: flex;
+  align-items: center;
+  justify-content: center;
+  cursor: pointer;
+  transition: background 0.2s, border-color 0.2s;
+}
+.cta-icon-btn:hover { background: rgba(255,255,255,0.15); border-color: rgba(255,255,255,0.6); }
+.cta-icon-btn svg { color: #fff; }
+.btn-outline-white {
+  display: inline-flex;
+  align-items: center;
+  gap: 8px;
+  background: transparent;
+  border: 2px solid rgba(255,255,255,0.5);
+  border-radius: 12px;
+  padding: 14px 28px;
+  font-family: var(--font-body);
+  font-size: 15px;
+  font-weight: 600;
+  color: #fff;
+  cursor: pointer;
+  text-decoration: none;
+  transition: background 0.2s, border-color 0.2s;
+  white-space: nowrap;
+}
+.btn-outline-white:hover { background: rgba(255,255,255,0.15); border-color: #fff; }
+
+/* FAQ */
+.faq-list {
+  display: flex;
+  flex-direction: column;
+  gap: 12px;
+  max-width: 800px;
+}
+.faq-item {
+  background: var(--card-bg);
+  border: 1px solid var(--card-border);
+  border-radius: 14px;
+  overflow: hidden;
+}
+.faq-question {
+  width: 100%;
+  padding: 20px 24px;
+  background: transparent;
+  border: none;
+  font-family: var(--font-body);
+  font-size: 16px;
+  font-weight: 600;
+  color: var(--fg);
+  text-align: left;
+  cursor: pointer;
+  display: flex;
+  justify-content: space-between;
+  align-items: center;
+  gap: 16px;
+}
+.faq-question svg {
+  flex-shrink: 0;
+  transition: transform 0.3s;
+  color: var(--fg-muted);
+}
+.faq-item.open .faq-question svg { transform: rotate(180deg); }
+.faq-answer {
+  padding: 0 24px 0;
+  max-height: 0;
+  overflow: hidden;
+  transition: max-height 0.3s ease, padding 0.3s ease;
+}
+.faq-item.open .faq-answer {
+  max-height: 300px;
+  padding: 0 24px 20px;
+}
+.faq-answer p {
+  font-size: 14px;
+  color: var(--fg-muted);
+  line-height: 1.7;
+}
+
+/* Footer */
+.footer {
+  border-top: 1px solid var(--card-border);
+  padding-block: 48px;
+}
+.footer-inner {
+  max-width: 1280px;
+  margin: 0 auto;
+  padding-left: max(16px, env(safe-area-inset-left, 0px));
+  padding-right: max(16px, env(safe-area-inset-right, 0px));
+  display: grid;
+  grid-template-columns: 1.5fr 1fr 1fr 1fr;
+  gap: 40px;
+}
+.footer-brand .logo { margin-bottom: 16px; display: inline-block; }
+.footer-brand p { font-size: 14px; color: var(--fg-muted); line-height: 1.6; }
+.footer-col h4 {
+  font-family: var(--font-display);
+  font-size: 14px;
+  font-weight: 600;
+  letter-spacing: 1px;
+  text-transform: uppercase;
+  color: var(--fg);
+  margin-bottom: 16px;
+}
+.footer-col a {
+  display: block;
+  font-size: 14px;
+  color: var(--fg-muted);
+  text-decoration: none;
+  padding: 4px 0;
+  transition: color 0.2s;
+}
+.footer-col a:hover { color: var(--accent); }
+.footer-bottom {
+  max-width: 1280px;
+  margin: 32px auto 0;
+  padding-left: max(16px, env(safe-area-inset-left, 0px));
+  padding-right: max(16px, env(safe-area-inset-right, 0px));
+  padding-top: 24px;
+  border-top: 1px solid var(--card-border);
+  display: flex;
+  justify-content: space-between;
+  align-items: center;
+  flex-wrap: wrap;
+  gap: 16px;
+  font-size: 13px;
+  color: var(--fg-light);
+}
+
+/* Mobile nav */
+.mobile-nav {
+  display: none;
+  position: fixed;
+  inset: 0;
+  z-index: 200;
+  background: var(--bg);
+  padding: 20px;
+  padding-left: max(20px, env(safe-area-inset-left, 0px));
+  padding-right: max(20px, env(safe-area-inset-right, 0px));
+  overflow-y: auto;
+  flex-direction: column;
+}
+.mobile-nav.open { display: flex; }
+.mobile-nav-header {
+  display: flex;
+  justify-content: space-between;
+  align-items: center;
+  margin-bottom: 40px;
+}
+.mobile-nav-close {
+  width: 44px; height: 44px;
+  background: transparent;
+  border: 1px solid var(--card-border);
+  border-radius: 10px;
+  display: flex;
+  align-items: center;
+  justify-content: center;
+  cursor: pointer;
+  color: var(--fg);
+}
+.mobile-nav a {
+  display: block;
+  font-family: var(--font-display);
+  font-size: 28px;
+  font-weight: 600;
+  color: var(--fg);
+  text-decoration: none;
+  padding: 12px 0;
+  border-bottom: 1px solid var(--card-border);
+}
+.mobile-nav a:hover { color: var(--accent); }
+.mobile-nav-contacts {
+  margin-top: auto;
+  padding-top: 32px;
+}
+.mobile-nav-contacts a {
+  font-size: 18px;
+  border: none;
+}
+
+/* Responsive */
+@media (max-width: 900px) {
+  .search-box, .header-icons, .header-phone span { display: none; }
+  .header-phone svg { display: flex; }
+  .services-grid { grid-template-columns: 1fr; }
+  .features-strip { grid-template-columns: 1fr; gap: 12px; margin-top: -40px; }
+  .feature-card { min-height: 140px; }
+  .hero-content { padding-block: 60px 100px; }
+  .brands-grid { grid-template-columns: repeat(3, 1fr); }
+  .services-list { grid-template-columns: 1fr; }
+  .detailing-grid { grid-template-columns: 1fr; }
+  .cta-banner { padding: 32px 24px; flex-direction: column; text-align: center; }
+  .cta-right { justify-content: center; }
+  .footer-inner { grid-template-columns: 1fr 1fr; }
+  .section { padding-block: 56px; }
+}
+@media (max-width: 600px) {
+  .brands-grid { grid-template-columns: repeat(2, 1fr); }
+  .footer-inner { grid-template-columns: 1fr; gap: 32px; }
+}
+@media (prefers-reduced-motion: reduce) {
+  *, *::before, *::after { transition-duration: 0.01ms !important; animation-duration: 0.01ms !important; }
+}
+</style>
+
+<!-- Header -->
+<header class="header">
+  <div class="header-inner">
+    <a href="#" class="logo">GRAFIT</a>
+    <div class="search-box">
+      <svg width="18" height="18" viewBox="0 0 24 24" fill="none" stroke="currentColor" stroke-width="2"><circle cx="11" cy="11" r="8"/><path d="m21 21-4.3-4.3"/></svg>
+      <input type="text" placeholder="Поиск интересного...">
+    </div>
+    <div class="header-right">
+      <a href="tel:+79962996939" class="header-phone">
+        <svg width="20" height="20" viewBox="0 0 24 24" fill="none" stroke="currentColor" stroke-width="2"><path d="M22 16.92v3a2 2 0 0 1-2.18 2 19.79 19.79 0 0 1-8.63-3.07 19.5 19.5 0 0 1-6-6 19.79 19.79 0 0 1-3.07-8.67A2 2 0 0 1 4.11 2h3a2 2 0 0 1 2 1.72c.127.96.361 1.903.7 2.81a2 2 0 0 1-.45 2.11L8.09 9.91a16 16 0 0 0 6 6l1.27-1.27a2 2 0 0 1 2.11-.45c.907.339 1.85.573 2.81.7A2 2 0 0 1 22 16.92z"/></svg>
+        <span>+7 996 299 69 39</span>
+      </a>
+      <div class="header-icons">
+        <a href="#" aria-label="Избранное"><svg width="22" height="22" viewBox="0 0 24 24" fill="none" stroke="currentColor" stroke-width="2"><path d="M20.84 4.61a5.5 5.5 0 0 0-7.78 0L12 5.67l-1.06-1.06a5.5 5.5 0 0 0-7.78 7.78l1.06 1.06L12 21.23l7.78-7.78 1.06-1.06a5.5 5.5 0 0 0 0-7.78z"/></svg></a>
+        <a href="#" aria-label="Корзина"><svg width="22" height="22" viewBox="0 0 24 24" fill="none" stroke="currentColor" stroke-width="2"><path d="M6 2 3 6v14a2 2 0 0 0 2 2h14a2 2 0 0 0 2-2V6l-3-4z"/><path d="M3 6h18"/><path d="M16 10a4 4 0 0 1-8 0"/></svg></a>
+      </div>
+      <button class="menu-btn" id="menuOpen" aria-label="Открыть меню">Меню <svg width="18" height="18" viewBox="0 0 24 24" fill="none" stroke="currentColor" stroke-width="2"><path d="M3 12h18M3 6h18M3 18h18"/></svg></button>
+    </div>
+  </div>
+</header>
+
+<!-- Mobile Nav -->
+<nav class="mobile-nav" id="mobileNav">
+  <div class="mobile-nav-header">
+    <span class="logo">GRAFIT</span>
+    <button class="mobile-nav-close" id="menuClose" aria-label="Закрыть меню"><svg width="24" height="24" viewBox="0 0 24 24" fill="none" stroke="currentColor" stroke-width="2"><path d="M18 6 6 18M6 6l12 12"/></svg></button>
+  </div>
+  <a href="#services">Сервис</a>
+  <a href="#brands">Марки</a>
+  <a href="#detailing">Детейлинг</a>
+  <a href="#faq">Вопросы</a>
+  <a href="#">Русификация</a>
+  <a href="#">Блог</a>
+  <a href="#">Партнёрам</a>
+  <a href="#">Отзывы</a>
+  <a href="#">О нас</a>
+  <div class="mobile-nav-contacts">
+    <a href="tel:+79962996939">+7 996 299 69 39</a>
+  </div>
+</nav>
+
+<!-- Hero -->
+<section class="hero">
+  <div class="hero-bg" role="presentation"></div>
+  <div class="hero-content">
+    <h1>Сервис, русификация и ремонт китайских автомобилей</h1>
+    <p class="hero-sub">Техническое обслуживание, дооснащение, диагностика, детейлинг и ремонт</p>
+    <a href="#contact" class="btn-primary">Записаться в техцентр <svg width="18" height="18" viewBox="0 0 24 24" fill="none" stroke="currentColor" stroke-width="2"><path d="M5 12h14M12 5l7 7-7 7"/></svg></a>
+  </div>
+</section>
+
+<!-- Features -->
+<div class="features-strip">
+  <div class="feature-card">
+    <div class="feature-dot"></div>
+    <h3>Диагностика</h3>
+    <p>Бесплатная диагностика авто по 39 параметрам</p>
+  </div>
+  <div class="feature-card">
+    <div class="feature-dot"></div>
+    <h3>Гарантия</h3>
+    <p>12 месяцев гарантии и полная техподдержка</p>
+  </div>
+  <div class="feature-card">
+    <div class="feature-dot"></div>
+    <h3>Надежность</h3>
+    <p>6 лет работаем с автомобилями премиум-класса</p>
+  </div>
+</div>
+
+<!-- Services -->
+<section class="section" id="services">
+  <div class="section-inner">
+    <h2 class="section-title">Техническое обслуживание<br>и ремонт автомобиля</h2>
+    <div class="services-grid">
+      <div class="service-card">
+        <div class="service-card-top">
+          <h3>Техническое<br>обслуживание</h3>
+          <div class="service-arrow"><svg width="18" height="18" viewBox="0 0 24 24" fill="none" stroke="currentColor" stroke-width="2.5"><path d="M7 17 17 7M7 7h10v10"/></svg></div>
+        </div>
+        <p class="service-card-desc">Плановое ТО с заменой необходимых расходных материалов и проверкой состояния автомобиля</p>
+        <div class="service-card-img" style="background: linear-gradient(135deg, #2a2a2a 0%, #3a3a3a 100%);"></div>
+      </div>
+      <div class="service-card">
+        <div class="service-card-top">
+          <h3>Компьютерная<br>диагностика</h3>
+          <div class="service-arrow"><svg width="18" height="18" viewBox="0 0 24 24" fill="none" stroke="currentColor" stroke-width="2.5"><path d="M7 17 17 7M7 7h10v10"/></svg></div>
+        </div>
+        <p class="service-card-desc">Проверяем не только наличие ошибок, но и причину их появления</p>
+        <div class="service-card-img" style="background: linear-gradient(135deg, #2a2a2a 0%, #3a3a3a 100%);"></div>
+      </div>
+      <div class="service-card">
+        <div class="service-card-top">
+          <h3>Русификация<br>автомобиля</h3>
+          <div class="service-arrow"><svg width="18" height="18" viewBox="0 0 24 24" fill="none" stroke="currentColor" stroke-width="2.5"><path d="M7 17 17 7M7 7h10v10"/></svg></div>
+        </div>
+        <p class="service-card-desc">Адаптация интерфейса автомобиля для поддерживаемых марок и версий программного обеспечения</p>
+        <div class="service-card-img" style="background: linear-gradient(135deg, #2a2a2a 0%, #3a3a3a 100%);"></div>
+      </div>
+    </div>
+  </div>
+</section>
+
+<!-- Full services list -->
+<section class="section" style="background: var(--bg-alt);">
+  <div class="section-inner">
+    <h2 class="section-title">Полный перечень услуг</h2>
+    <div class="services-list">
+      <div class="services-list-item">
+        <div class="check-icon"><svg viewBox="0 0 24 24" fill="none" stroke="currentColor" stroke-width="3"><path d="M20 6 9 17l-5-5"/></svg></div>
+        <span>Плановое ТО по регламенту производителя</span>
+      </div>
+      <div class="services-list-item">
+        <div class="check-icon"><svg viewBox="0 0 24 24" fill="none" stroke="currentColor" stroke-width="3"><path d="M20 6 9 17l-5-5"/></svg></div>
+        <span>Компьютерная диагностика всех систем</span>
+      </div>
+      <div class="services-list-item">
+        <div class="check-icon"><svg viewBox="0 0 24 24" fill="none" stroke="currentColor" stroke-width="3"><path d="M20 6 9 17l-5-5"/></svg></div>
+        <span>Замена масла, технических жидкостей, фильтров, свечей</span>
+      </div>
+      <div class="services-list-item">
+        <div class="check-icon"><svg viewBox="0 0 24 24" fill="none" stroke="currentColor" stroke-width="3"><path d="M20 6 9 17l-5-5"/></svg></div>
+        <span>Обслуживание гибридов и электромобилей (проверка ВВ-батареи, силовой электроники)</span>
+      </div>
+      <div class="services-list-item">
+        <div class="check-icon"><svg viewBox="0 0 24 24" fill="none" stroke="currentColor" stroke-width="3"><path d="M20 6 9 17l-5-5"/></svg></div>
+        <span>Диагностика и ремонт тормозной системы</span>
+      </div>
+      <div class="services-list-item">
+        <div class="check-icon"><svg viewBox="0 0 24 24" fill="none" stroke="currentColor" stroke-width="3"><path d="M20 6 9 17l-5-5"/></svg></div>
+        <span>Диагностика и ремонт подвески и рулевого управления</span>
+      </div>
+      <div class="services-list-item">
+        <div class="check-icon"><svg viewBox="0 0 24 24" fill="none" stroke="currentColor" stroke-width="3"><path d="M20 6 9 17l-5-5"/></svg></div>
+        <span>Обслуживание АКПП, вариатора, робота</span>
+      </div>
+      <div class="services-list-item">
+        <div class="check-icon"><svg viewBox="0 0 24 24" fill="none" stroke="currentColor" stroke-width="3"><path d="M20 6 9 17l-5-5"/></svg></div>
+        <span>Русификация и программирование ключей</span>
+      </div>
+    </div>
+  </div>
+</section>
+
+<!-- Brands -->
+<section class="section" id="brands">
+  <div class="section-inner">
+    <h2 class="section-title">Обслуживаемые марки</h2>
+    <div class="brands-grid">
+      <div class="brand-item"><img src="https://static.tildacdn.com/tild3835-6639-4265-a563-343633326634/_lixiang.png" alt="LiXiang" loading="lazy">LiXiang</div>
+      <div class="brand-item"><img src="https://static.tildacdn.com/tild3265-3264-4663-b163-313962383766/zeekr-logo.webp" alt="Zeekr" loading="lazy">Zeekr</div>
+      <div class="brand-item"><img src="https://static.tildacdn.com/tild6663-6563-4937-b431-333730626564/voyah.png" alt="Voyah" loading="lazy">Voyah</div>
+      <div class="brand-item"><img src="https://static.tildacdn.com/tild6562-3431-4432-b432-666364316664/avatr.png" alt="Avatr" loading="lazy">Avatr</div>
+      <div class="brand-item"><img src="https://static.tildacdn.com/tild3730-6631-4634-a431-633138396638/geely.png" alt="Geely" loading="lazy">Geely</div>
+      <div class="brand-item"><img src="https://static.tildacdn.com/tild3733-6430-4537-b337-623131363731/haval.png" alt="Haval" loading="lazy">Haval</div>
+      <div class="brand-item"><img src="https://static.tildacdn.com/tild3239-6130-4039-b438-393738326530/chery.png" alt="Chery" loading="lazy">Chery</div>
+      <div class="brand-item"><img src="https://static.tildacdn.com/tild3031-3631-4564-a165-323137393136/changan-1_1.png" alt="Changan" loading="lazy">Changan</div>
+      <div class="brand-item"><img src="https://static.tildacdn.com/tild3863-3730-4734-b232-333763353132/omoda.png" alt="Omoda" loading="lazy">Omoda</div>
+      <div class="brand-item"><img src="https://static.tildacdn.com/tild6331-6363-4662-a364-383064643964/jaecoo_1.png" alt="Jaecoo" loading="lazy">Jaecoo</div>
+      <div class="brand-item"><img src="https://static.tildacdn.com/tild3538-3462-4836-a430-386239656432/jetour.png" alt="Jetour" loading="lazy">Jetour</div>
+      <div class="brand-item"><img src="https://static.tildacdn.com/tild6338-3238-4330-b830-373365613761/byd.png" alt="BYD" loading="lazy">BYD</div>
+      <div class="brand-item"><img src="https://static.tildacdn.com/tild3361-6165-4239-b338-336133656566/hongqi.png" alt="Hongqi" loading="lazy">Hongqi</div>
+      <div class="brand-item"><img src="https://static.tildacdn.com/tild3831-6661-4963-b238-306135643563/Belgee.png" alt="Belgee" loading="lazy">Belgee</div>
+      <div class="brand-item"><img src="https://static.tildacdn.com/tild3363-3735-4563-b231-316137306436/denza.png" alt="Denza" loading="lazy">Denza</div>
+      <div class="brand-item"><img src="https://static.tildacdn.com/tild6333-3063-4166-a339-616665313332/-/resize/20x/exeed.png" alt="Exeed" loading="lazy">Exeed</div>
+      <div class="brand-item"><img src="https://static.tildacdn.com/tild3534-3137-4439-b233-343030376165/polarstone.png" alt="Polarstone" loading="lazy">Polarstone</div>
+    </div>
+  </div>
+</section>
+
+<!-- Detailing -->
+<section class="section" id="detailing" style="background: var(--bg-alt);">
+  <div class="section-inner">
+    <h2 class="section-title">Детейлинг и дополнительные услуги</h2>
+    <div class="detailing-grid">
+      <div class="detailing-card">
+        <div class="icon-wrap"><svg width="24" height="24" viewBox="0 0 24 24" fill="none" stroke="currentColor" stroke-width="2"><path d="M12 22s8-4 8-10V5l-8-3-8 3v7c0 6 8 10 8 10z"/></svg></div>
+        <h4>Керамика и полировка</h4>
+        <p>Защитное керамическое покрытие и полировка кузова</p>
+      </div>
+      <div class="detailing-card">
+        <div class="icon-wrap"><svg width="24" height="24" viewBox="0 0 24 24" fill="none" stroke="currentColor" stroke-width="2"><circle cx="12" cy="12" r="10"/><path d="M12 6v6l4 2"/></svg></div>
+        <h4>Антикор арок</h4>
+        <p>Антикоррозийная обработка колёсных арок</p>
+      </div>
+      <div class="detailing-card">
+        <div class="icon-wrap"><svg width="24" height="24" viewBox="0 0 24 24" fill="none" stroke="currentColor" stroke-width="2"><path d="M3 6l3 1m0 0l-3 9a5.002 5.002 0 006.001 0M6 7l3 9M6 7l6-2m6 2l3-1m-3 1l-3 9a5.002 5.002 0 006.001 0M18 7l3 9m-3-9l-6-2m0-2v2"/></svg></div>
+        <h4>Химчистка</h4>
+        <p>Профессиональная химчистка салона</p>
+      </div>
+      <div class="detailing-card">
+        <div class="icon-wrap"><svg width="24" height="24" viewBox="0 0 24 24" fill="none" stroke="currentColor" stroke-width="2"><circle cx="12" cy="12" r="3"/><path d="M12 1v2m0 18v2M4.22 4.22l1.42 1.42m12.72 12.72l1.42 1.42M1 12h2m18 0h2M4.22 19.78l1.42-1.42M18.36 5.64l1.42-1.42"/></svg></div>
+        <h4>Шиномонтаж</h4>
+        <p>Сезонный шиномонтаж и балансировка</p>
+      </div>
+      <div class="detailing-card">
+        <div class="icon-wrap"><svg width="24" height="24" viewBox="0 0 24 24" fill="none" stroke="currentColor" stroke-width="2"><path d="M9 19V6l12-3v13"/><circle cx="6" cy="18" r="3"/><circle cx="18" cy="16" r="3"/></svg></div>
+        <h4>Шумоизоляция</h4>
+        <p>Комплексная шумоизоляция автомобиля</p>
+      </div>
+      <div class="detailing-card">
+        <div class="icon-wrap"><svg width="24" height="24" viewBox="0 0 24 24" fill="none" stroke="currentColor" stroke-width="2"><rect x="2" y="3" width="20" height="14" rx="2" ry="2"/><path d="M8 21h8M12 17v4"/></svg></div>
+        <h4>Оклейка кузова</h4>
+        <p>Защитная оклейка кузова полиуретановой плёнкой</p>
+      </div>
+    </div>
+  </div>
+</section>
+
+<!-- FAQ -->
+<section class="section" id="faq">
+  <div class="section-inner">
+    <h2 class="section-title">Часто задаваемые вопросы</h2>
+    <div class="faq-list">
+      <div class="faq-item">
+        <button class="faq-question">Какие марки автомобилей вы обслуживаете? <svg width="20" height="20" viewBox="0 0 24 24" fill="none" stroke="currentColor" stroke-width="2"><path d="m6 9 6 6 6-6"/></svg></button>
+        <div class="faq-answer"><p>Мы специализируемся на китайских премиальных автомобилях: LiXiang, Zeekr, Voyah, Avatr, Geely, Haval, Chery, Changan, Omoda, Jaecoo, Jetour, BYD, Hongqi, Belgee, Denza, Exeed, Polarstone и других.</p></div>
+      </div>
+      <div class="faq-item">
+        <button class="faq-question">Сколько длится диагностика? <svg width="20" height="20" viewBox="0 0 24 24" fill="none" stroke="currentColor" stroke-width="2"><path d="m6 9 6 6 6-6"/></svg></button>
+        <div class="faq-answer"><p>Бесплатная диагностика по 39 параметрам занимает от 30 минут до 1 часа в зависимости от модели автомобиля.</p></div>
+      </div>
+      <div class="faq-item">
+        <button class="faq-question">Какая гарантия на выполненные работы? <svg width="20" height="20" viewBox="0 0 24 24" fill="none" stroke="currentColor" stroke-width="2"><path d="m6 9 6 6 6-6"/></svg></button>
+        <div class="faq-answer"><p>На все выполненные работы предоставляется гарантия 12 месяцев с полной техподдержкой.</p></div>
+      </div>
+      <div class="faq-item">
+        <button class="faq-question">В каких городах вы работаете? <svg width="20" height="20" viewBox="0 0 24 24" fill="none" stroke="currentColor" stroke-width="2"><path d="m6 9 6 6 6-6"/></svg></button>
+        <div class="faq-answer"><p>Наши технические центры расположены в Москве, Уфе и Краснодаре. Запишитесь на обслуживание в ближайший к вам филиал.</p></div>
+      </div>
+      <div class="faq-item">
+        <button class="faq-question">Что входит в русификацию автомобиля? <svg width="20" height="20" viewBox="0 0 24 24" fill="none" stroke="currentColor" stroke-width="2"><path d="m6 9 6 6 6-6"/></svg></button>
+        <div class="faq-answer"><p>Русификация включает адаптацию интерфейса мультимедийной системы, навигации и бортового компьютера на русский язык для поддерживаемых марок и версий ПО.</p></div>
+      </div>
+    </div>
+  </div>
+</section>
+
+<!-- CTA Banner -->
+<section class="section" id="contact">
+  <div class="section-inner">
+    <div class="cta-banner">
+      <div>
+        <h2>Свяжитесь с нами</h2>
+        <p>Получите профессиональную диагностику и обслуживание вашего автомобиля уже сегодня</p>
+      </div>
+      <div class="cta-right">
+        <button class="cta-icon-btn" aria-label="Telegram"><svg width="22" height="22" viewBox="0 0 24 24" fill="currentColor"><path d="M11.944 0A12 12 0 0 0 0 12a12 12 0 0 0 12 12 12 12 0 0 0 12-12A12 12 0 0 0 12 0h-.056zm4.962 7.224c.1-.002.321.023.465.14a.506.506 0 0 1 .171.325c.016.093.036.306.02.472-.18 1.898-.962 6.502-1.36 8.627-.168.9-.499 1.201-.82 1.23-.696.065-1.225-.46-1.9-.902-1.056-.693-1.653-1.124-2.678-1.8-1.185-.78-.417-1.21.258-1.91.177-.184 3.247-2.977 3.307-3.23.007-.032.014-.15-.056-.212s-.174-.041-.249-.024c-.106.024-1.793 1.14-5.061 3.345-.48.33-.913.49-1.302.48-.428-.008-1.252-.241-1.865-.44-.752-.245-1.349-.374-1.297-.789.027-.216.325-.437.893-.663 3.498-1.524 5.83-2.529 6.998-3.014 3.332-1.386 4.025-1.627 4.476-1.635z"/></svg></button>
+        <button class="cta-icon-btn" aria-label="Чат"><svg width="22" height="22" viewBox="0 0 24 24" fill="none" stroke="currentColor" stroke-width="2"><path d="M21 15a2 2 0 0 1-2 2H7l-4 4V5a2 2 0 0 1 2-2h14a2 2 0 0 1 2 2z"/></svg></button>
+        <a href="#" class="btn-outline-white">Связаться с нами <svg width="16" height="16" viewBox="0 0 24 24" fill="none" stroke="currentColor" stroke-width="2"><path d="M5 12h14M12 5l7 7-7 7"/></svg></a>
+      </div>
+    </div>
+  </div>
+</section>
+
+<!-- Footer -->
+<footer class="footer">
+  <div class="footer-inner">
+    <div class="footer-brand">
+      <span class="logo">GRAFIT</span>
+      <p>Технический центр китайских премиальных автомобилей. Техническое обслуживание, дооснащение, диагностика, детейлинг и ремонт.</p>
+    </div>
+    <div class="footer-col">
+      <h4>Сервис</h4>
+      <a href="#">Техническое обслуживание</a>
+      <a href="#">Компьютерная диагностика</a>
+      <a href="#">Ремонт подвески</a>
+      <a href="#">Тормозная система</a>
+      <a href="#">Обслуживание АКПП</a>
+    </div>
+    <div class="footer-col">
+      <h4>Услуги</h4>
+      <a href="#">Русификация</a>
+      <a href="#">Детейлинг</a>
+      <a href="#">Шумоизоляция</a>
+      <a href="#">Оклейка кузова</a>
+      <a href="#">Шиномонтаж</a>
+    </div>
+    <div class="footer-col">
+      <h4>Контакты</h4>
+      <a href="tel:+79962996939">+7 996 299 69 39</a>
+      <a href="#">Москва</a>
+      <a href="#">Уфа</a>
+      <a href="#">Краснодар</a>
+      <a href="#">Telegram: @GRAFIT_PRO</a>
+    </div>
+  </div>
+  <div class="footer-bottom">
+    <span>&copy; 2024 GRAFIT Service. Все права защищены.</span>
+    <a href="#" style="color: var(--fg-light); text-decoration: none;">Политика конфиденциальности</a>
+  </div>
+</footer>
+
+<script>
+document.querySelectorAll('.faq-question').forEach(btn => {
+  btn.addEventListener('click', () => {
+    const item = btn.parentElement;
+    item.classList.toggle('open');
+  });
+});
+
+const menuOpen = document.getElementById('menuOpen');
+const menuClose = document.getElementById('menuClose');
+const mobileNav = document.getElementById('mobileNav');
+
+menuOpen.addEventListener('click', () => mobileNav.classList.add('open'));
+menuClose.addEventListener('click', () => mobileNav.classList.remove('open'));
+mobileNav.querySelectorAll('a').forEach(a => {
+  a.addEventListener('click', () => mobileNav.classList.remove('open'));
+});
+</script>
