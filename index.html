@@ -129,7 +129,12 @@ a { text-decoration: none; }
   position: relative;
   flex-shrink: 0;
 }
-.icon-btn:hover { opacity: 1; }
+.icon-btn:hover {
+  opacity: 1;
+  border-color: rgba(255,255,255,0.6);
+  transform: scale(1.08);
+}
+.icon-btn { transition: opacity 0.3s, border-color 0.3s, transform 0.3s; }
 .menu-btn {
   display: flex;
   align-items: center;
@@ -157,7 +162,7 @@ a { text-decoration: none; }
   z-index: 5;
   max-width: 1340px;
   margin: 0 auto;
-  padding: 130px 0 93px;
+  padding: 110px 0 50px;
 }
 .hero-title {
   font-size: 49px;
@@ -189,9 +194,15 @@ a { text-decoration: none; }
   font-size: 16px;
   font-weight: 500;
   cursor: pointer;
-  transition: background 0.2s;
+  transition: background 0.3s, transform 0.3s, box-shadow 0.3s;
 }
-.btn-primary:hover { background: #e5751f; }
+.btn-primary:hover {
+  background: #e5751f;
+  transform: translateY(-2px);
+  box-shadow: 0 8px 25px rgba(252,133,53,0.4);
+}
+.btn-primary svg { transition: transform 0.3s; }
+.btn-primary:hover svg { transform: translateX(4px); }
 
 /* ===== FEATURE CARDS (inside hero) ===== */
 .features-strip {
@@ -216,6 +227,12 @@ a { text-decoration: none; }
   flex-direction: column;
   justify-content: flex-end;
   padding: 30px;
+  transition: border-color 0.3s, transform 0.3s;
+  cursor: pointer;
+}
+.feature-card:hover {
+  border-color: rgba(252,133,53,0.5);
+  transform: translateY(-4px);
 }
 .feature-dot {
   position: absolute;
@@ -272,6 +289,12 @@ a { text-decoration: none; }
   background: #fff;
   border-radius: 16px;
   overflow: hidden;
+  transition: transform 0.3s, box-shadow 0.3s;
+  cursor: pointer;
+}
+.service-card:hover {
+  transform: translateY(-6px);
+  box-shadow: 0 16px 40px rgba(0,0,0,0.08);
 }
 .service-card-header {
   display: flex;
@@ -290,6 +313,10 @@ a { text-decoration: none; }
   width: 45px;
   height: 45px;
   flex-shrink: 0;
+  transition: transform 0.3s;
+}
+.service-card:hover .arrow-btn {
+  transform: translate(3px, -3px);
 }
 .service-card-desc {
   padding: 10px 30px 0;
@@ -309,6 +336,10 @@ a { text-decoration: none; }
   display: block;
   aspect-ratio: 377 / 267;
   object-fit: cover;
+  transition: transform 0.5s;
+}
+.service-card:hover .service-card-img img {
+  transform: scale(1.05);
 }
 
 /* ===== CTA BANNER ===== */
@@ -358,7 +389,12 @@ a { text-decoration: none; }
   transition: background 0.2s;
   flex-shrink: 0;
 }
-.cta-icon-btn:hover { background: #f5f5f5; }
+.cta-icon-btn:hover {
+  background: #f5f5f5;
+  transform: translateY(-3px);
+  box-shadow: 0 6px 20px rgba(0,0,0,0.15);
+}
+.cta-icon-btn { transition: background 0.3s, transform 0.3s, box-shadow 0.3s; }
 .btn-cta-white {
   display: inline-flex;
   align-items: center;
@@ -375,7 +411,13 @@ a { text-decoration: none; }
   transition: background 0.2s;
   white-space: nowrap;
 }
-.btn-cta-white:hover { background: #f5f5f5; }
+.btn-cta-white:hover {
+  background: #f5f5f5;
+  transform: translateY(-2px);
+  box-shadow: 0 6px 20px rgba(0,0,0,0.1);
+}
+.btn-cta-white svg { transition: transform 0.3s; }
+.btn-cta-white:hover svg { transform: translateX(4px); }
 
 /* ===== MOBILE NAV ===== */
 .mobile-nav {
@@ -451,6 +493,74 @@ a { text-decoration: none; }
 }
 
 .header-icons { display: flex; align-items: center; gap: 15px; }
+
+/* ===== SCROLL ANIMATIONS ===== */
+.fade-up {
+  opacity: 0;
+  transform: translateY(40px);
+  transition: opacity 0.7s ease, transform 0.7s ease;
+}
+.fade-up.visible {
+  opacity: 1;
+  transform: translateY(0);
+}
+.fade-up-delay-1 { transition-delay: 0.1s; }
+.fade-up-delay-2 { transition-delay: 0.2s; }
+.fade-up-delay-3 { transition-delay: 0.3s; }
+
+/* Hero entrance */
+.hero-title {
+  animation: heroFadeIn 0.8s ease forwards;
+}
+.hero-subtitle {
+  animation: heroFadeIn 0.8s ease 0.15s forwards;
+  opacity: 0;
+}
+.hero .btn-primary {
+  animation: heroFadeIn 0.8s ease 0.3s forwards;
+  opacity: 0;
+}
+@keyframes heroFadeIn {
+  from { opacity: 0; transform: translateY(30px); }
+  to { opacity: 1; transform: translateY(0); }
+}
+
+/* Header entrance */
+.header {
+  animation: headerSlideDown 0.6s ease forwards;
+}
+@keyframes headerSlideDown {
+  from { opacity: 0; transform: translateY(-20px); }
+  to { opacity: 1; transform: translateY(0); }
+}
+
+/* Feature card hover glow */
+.feature-dot {
+  transition: box-shadow 0.3s;
+}
+.feature-card:hover .feature-dot {
+  box-shadow: 0 0 12px 4px rgba(252,133,53,0.6);
+}
+
+/* Search bar focus */
+.search-bar:focus-within {
+  border-color: rgba(255,255,255,0.6);
+}
+
+/* Menu button hover */
+.menu-btn {
+  transition: background 0.3s, box-shadow 0.3s;
+}
+.menu-btn:hover {
+  box-shadow: 0 4px 12px rgba(0,0,0,0.1);
+}
+
+@media (prefers-reduced-motion: reduce) {
+  *, *::before, *::after {
+    animation-duration: 0.01ms !important;
+    transition-duration: 0.01ms !important;
+  }
+}
 </style>
 </head>
 <body>
@@ -552,9 +662,9 @@ a { text-decoration: none; }
 <!-- SERVICES -->
 <div class="container">
   <section class="services-section" id="services">
-    <h2 class="section-title">Техническое обслуживание<br>и ремонт автомобиля</h2>
+    <h2 class="section-title fade-up">Техническое обслуживание<br>и ремонт автомобиля</h2>
     <div class="services-grid">
-      <div class="service-card">
+      <div class="service-card fade-up fade-up-delay-1">
         <div class="service-card-header">
           <h3>Техническое<br>обслуживание</h3>
           <img class="arrow-btn" src="assets/arrow-box.svg" alt="">
@@ -562,7 +672,7 @@ a { text-decoration: none; }
         <p class="service-card-desc">Плановое ТО с заменой необходимых расходных материалов и проверкой состояния автомобиля</p>
         <div class="service-card-img"><img src="assets/service-to.png" alt="Техническое обслуживание" loading="lazy"></div>
       </div>
-      <div class="service-card">
+      <div class="service-card fade-up fade-up-delay-2">
         <div class="service-card-header">
           <h3>Компьютерная<br>диагностика</h3>
           <img class="arrow-btn" src="assets/arrow-box.svg" alt="">
@@ -570,7 +680,7 @@ a { text-decoration: none; }
         <p class="service-card-desc">Проверяем не только наличие ошибок, но и причину их появления</p>
         <div class="service-card-img"><img src="assets/service-diag.png" alt="Компьютерная диагностика" loading="lazy"></div>
       </div>
-      <div class="service-card">
+      <div class="service-card fade-up fade-up-delay-3">
         <div class="service-card-header">
           <h3>Русификация<br>автомобиля</h3>
           <img class="arrow-btn" src="assets/arrow-box.svg" alt="">
@@ -583,7 +693,7 @@ a { text-decoration: none; }
 
   <!-- CTA BANNER -->
   <section class="cta-section" id="contact">
-    <div class="cta-banner">
+    <div class="cta-banner fade-up">
       <div class="cta-left">
         <h2>Свяжитесь с нами</h2>
         <p>Получите профессиональную диагностику и обслуживание<br>вашего электромобиля уже сегодня</p>
@@ -615,6 +725,18 @@ document.querySelectorAll('.mobile-nav a').forEach(function(a) {
   a.addEventListener('click', function() {
     document.getElementById('mobileNav').classList.remove('open');
   });
+});
+
+var observer = new IntersectionObserver(function(entries) {
+  entries.forEach(function(entry) {
+    if (entry.isIntersecting) {
+      entry.target.classList.add('visible');
+    }
+  });
+}, { threshold: 0.15 });
+
+document.querySelectorAll('.fade-up').forEach(function(el) {
+  observer.observe(el);
 });
 </script>
 </body>
