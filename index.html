@@ -568,9 +568,9 @@ a { text-decoration: none; }
   justify-content: center;
 }
 .brand-logo img {
-  max-height: 72px;
-  max-width: 75%;
-  object-fit: contain;
+  width: var(--w);
+  height: auto;
+  max-width: 85%;
   filter: grayscale(1);
   opacity: 0.75;
   transition: filter 0.4s, opacity 0.4s, transform 0.4s;
@@ -946,7 +946,7 @@ a { text-decoration: none; }
   .brands-grid { grid-template-columns: repeat(2, 1fr); gap: 10px; }
   .brand-tile { height: 150px; padding: 16px; }
   .brand-logo { height: 64px; }
-  .brand-logo img { max-height: 52px; }
+  .brand-logo img { width: calc(var(--w) * 0.72); }
   .duo-card { height: 420px; padding: 22px; }
   .duo-bottom h3 { font-size: 34px; letter-spacing: -1px; }
   .adv-grid { grid-template-columns: 1fr; }
@@ -1286,24 +1286,24 @@ a { text-decoration: none; }
       </a>
     </div>
     <div class="brands-grid fade-up">
-      <a href="#contact" class="brand-tile" data-brand="LiXiang"><div class="brand-name">LiXiang</div><div class="brand-logo"><img src="assets/brands/lixiang.png" alt="" loading="lazy"></div></a>
-      <a href="#contact" class="brand-tile" data-brand="ZEEKR"><div class="brand-name">ZEEKR</div><div class="brand-logo"><img src="assets/brands/zeekr.webp" alt="" loading="lazy"></div></a>
-      <a href="#contact" class="brand-tile" data-brand="VOYAH"><div class="brand-name">VOYAH</div><div class="brand-logo"><img src="assets/brands/voyah.png" alt="" loading="lazy"></div></a>
-      <a href="#contact" class="brand-tile" data-brand="Avatr"><div class="brand-name">Avatr</div><div class="brand-logo"><img src="assets/brands/avatr.png" alt="" loading="lazy"></div></a>
-      <a href="#contact" class="brand-tile" data-brand="DENZA"><div class="brand-name">DENZA</div><div class="brand-logo"><img src="assets/brands/denza.png" alt="" loading="lazy"></div></a>
-      <a href="#contact" class="brand-tile" data-brand="Geely"><div class="brand-name">Geely</div><div class="brand-logo"><img src="assets/brands/geely.png" alt="" loading="lazy"></div></a>
-      <a href="#contact" class="brand-tile" data-brand="Hongqi"><div class="brand-name">Hongqi</div><div class="brand-logo"><img src="assets/brands/hongqi.png" alt="" loading="lazy"></div></a>
-      <a href="#contact" class="brand-tile" data-brand="BYD"><div class="brand-name">BYD</div><div class="brand-logo"><img src="assets/brands/byd.png" alt="" loading="lazy"></div></a>
-      <a href="#contact" class="brand-tile" data-brand="EXEED"><div class="brand-name">EXEED</div><div class="brand-logo"><img src="assets/brands/exeed.png" alt="" loading="lazy"></div></a>
-      <a href="#contact" class="brand-tile" data-brand="Haval"><div class="brand-name">Haval</div><div class="brand-logo"><img src="assets/brands/haval.png" alt="" loading="lazy"></div></a>
-      <a href="#contact" class="brand-tile" data-brand="Leopard"><div class="brand-name">Leopard</div><div class="brand-logo"><img src="assets/brands/leopard.png" alt="" loading="lazy"></div></a>
-      <a href="#contact" class="brand-tile" data-brand="POLARSTONE"><div class="brand-name">POLARSTONE</div><div class="brand-logo"><img src="assets/brands/polarstone.png" alt="" loading="lazy"></div></a>
-      <a href="#contact" class="brand-tile" data-brand="Jetour"><div class="brand-name">Jetour</div><div class="brand-logo"><img src="assets/brands/jetour.png" alt="" loading="lazy"></div></a>
-      <a href="#contact" class="brand-tile" data-brand="Jaecoo"><div class="brand-name">Jaecoo</div><div class="brand-logo"><img src="assets/brands/jaecoo.png" alt="" loading="lazy"></div></a>
-      <a href="#contact" class="brand-tile" data-brand="Changan"><div class="brand-name">Changan</div><div class="brand-logo"><img src="assets/brands/changan.png" alt="" loading="lazy"></div></a>
-      <a href="#contact" class="brand-tile" data-brand="Omoda"><div class="brand-name">Omoda</div><div class="brand-logo"><img src="assets/brands/omoda.png" alt="" loading="lazy"></div></a>
-      <a href="#contact" class="brand-tile" data-brand="Chery"><div class="brand-name">Chery</div><div class="brand-logo"><img src="assets/brands/chery.png" alt="" loading="lazy"></div></a>
-      <a href="#contact" class="brand-tile" data-brand="Belgee"><div class="brand-name">Belgee</div><div class="brand-logo"><img src="assets/brands/belgee.png" alt="" loading="lazy"></div></a>
+      <a href="#contact" class="brand-tile" data-brand="LiXiang"><div class="brand-name">LiXiang</div><div class="brand-logo"><img src="assets/brands/lixiang.png" style="--w:96px" alt="" loading="lazy"></div></a>
+      <a href="#contact" class="brand-tile" data-brand="ZEEKR"><div class="brand-name">ZEEKR</div><div class="brand-logo"><img src="assets/brands/zeekr.png" style="--w:62px" alt="" loading="lazy"></div></a>
+      <a href="#contact" class="brand-tile" data-brand="VOYAH"><div class="brand-name">VOYAH</div><div class="brand-logo"><img src="assets/brands/voyah.png" style="--w:48px" alt="" loading="lazy"></div></a>
+      <a href="#contact" class="brand-tile" data-brand="Avatr"><div class="brand-name">Avatr</div><div class="brand-logo"><img src="assets/brands/avatr.png" style="--w:34px" alt="" loading="lazy"></div></a>
+      <a href="#contact" class="brand-tile" data-brand="DENZA"><div class="brand-name">DENZA</div><div class="brand-logo"><img src="assets/brands/denza.png" style="--w:62px" alt="" loading="lazy"></div></a>
+      <a href="#contact" class="brand-tile" data-brand="Geely"><div class="brand-name">Geely</div><div class="brand-logo"><img src="assets/brands/geely.png" style="--w:100px" alt="" loading="lazy"></div></a>
+      <a href="#contact" class="brand-tile" data-brand="Hongqi"><div class="brand-name">Hongqi</div><div class="brand-logo"><img src="assets/brands/hongqi.png" style="--w:36px" alt="" loading="lazy"></div></a>
+      <a href="#contact" class="brand-tile" data-brand="BYD"><div class="brand-name">BYD</div><div class="brand-logo"><img src="assets/brands/byd.png" style="--w:136px" alt="" loading="lazy"></div></a>
+      <a href="#contact" class="brand-tile" data-brand="EXEED"><div class="brand-name">EXEED</div><div class="brand-logo"><img src="assets/brands/exeed.png" style="--w:136px" alt="" loading="lazy"></div></a>
+      <a href="#contact" class="brand-tile" data-brand="Haval"><div class="brand-name">Haval</div><div class="brand-logo"><img src="assets/brands/haval.png" style="--w:140px" alt="" loading="lazy"></div></a>
+      <a href="#contact" class="brand-tile" data-brand="Leopard"><div class="brand-name">Leopard</div><div class="brand-logo"><img src="assets/brands/leopard.png" style="--w:130px" alt="" loading="lazy"></div></a>
+      <a href="#contact" class="brand-tile" data-brand="POLARSTONE"><div class="brand-name">POLARSTONE</div><div class="brand-logo"><img src="assets/brands/polarstone.png" style="--w:76px" alt="" loading="lazy"></div></a>
+      <a href="#contact" class="brand-tile" data-brand="Jetour"><div class="brand-name">Jetour</div><div class="brand-logo"><img src="assets/brands/jetour.png" style="--w:136px" alt="" loading="lazy"></div></a>
+      <a href="#contact" class="brand-tile" data-brand="Jaecoo"><div class="brand-name">Jaecoo</div><div class="brand-logo"><img src="assets/brands/jaecoo.png" style="--w:136px" alt="" loading="lazy"></div></a>
+      <a href="#contact" class="brand-tile" data-brand="Changan"><div class="brand-name">Changan</div><div class="brand-logo"><img src="assets/brands/changan.png" style="--w:62px" alt="" loading="lazy"></div></a>
+      <a href="#contact" class="brand-tile" data-brand="Omoda"><div class="brand-name">Omoda</div><div class="brand-logo"><img src="assets/brands/omoda.png" style="--w:136px" alt="" loading="lazy"></div></a>
+      <a href="#contact" class="brand-tile" data-brand="Chery"><div class="brand-name">Chery</div><div class="brand-logo"><img src="assets/brands/chery.png" style="--w:116px" alt="" loading="lazy"></div></a>
+      <a href="#contact" class="brand-tile" data-brand="Belgee"><div class="brand-name">Belgee</div><div class="brand-logo"><img src="assets/brands/belgee.png" style="--w:100px" alt="" loading="lazy"></div></a>
     </div>
   </section>
 
