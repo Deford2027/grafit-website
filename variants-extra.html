@@ -1,0 +1,269 @@
+<!DOCTYPE html>
+<html lang="ru">
+<head>
+<meta charset="UTF-8">
+<meta name="viewport" content="width=device-width, initial-scale=1">
+<title>GRAFIT — варианты блока «Детейлинг и русификация»</title>
+<meta name="robots" content="noindex">
+<link rel="stylesheet" href="https://fonts.googleapis.com/css2?family=Inter:wght@400;500;600;700&display=swap">
+<style>
+*{margin:0;padding:0;box-sizing:border-box}
+body{font-family:'Inter',sans-serif;background:#eceef2;color:#1e1e1e;-webkit-font-smoothing:antialiased}
+a{color:inherit;text-decoration:none}
+img{display:block;max-width:100%}
+.wrap{max-width:1440px;margin:0 auto;padding:0 50px}
+.variant{padding:110px 0 40px;border-bottom:1px dashed rgba(40,40,40,.18)}
+.v-label{display:flex;gap:14px;align-items:center;margin-bottom:46px;font-size:14px;color:rgba(40,40,40,.55)}
+.v-label b{background:#1e1e1e;color:#fff;border-radius:6px;padding:5px 10px;font-weight:600;letter-spacing:.04em}
+.tag{display:inline-block;padding:7px 18px;border:1px solid rgba(40,40,40,.25);border-radius:30px;font-size:15px;color:rgba(40,40,40,.6);margin-bottom:20px}
+.title{font-size:49px;font-weight:500;letter-spacing:-1.47px;line-height:1.05;margin-bottom:50px;text-wrap:balance}
+.arrow{width:45px;height:45px;flex-shrink:0;border-radius:5px;background:#fc8535;display:grid;place-items:center;transition:transform .3s,background .3s}
+.arrow svg{width:18px;height:18px}
+.top-note{padding:40px 0 0;font-size:15px;color:rgba(40,40,40,.6);max-width:760px;line-height:1.5}
+.top-note h1{font-size:28px;color:#1e1e1e;font-weight:600;margin-bottom:8px}
+
+/* ===== A: Expanding gallery ===== */
+.va-grid{display:flex;gap:20px;height:560px}
+.va-card{position:relative;flex:1;border-radius:16px;overflow:hidden;color:#fff;padding:30px;display:flex;flex-direction:column;justify-content:flex-end;isolation:isolate;transition:flex .7s cubic-bezier(.2,.7,.2,1)}
+.va-card>img{position:absolute;inset:0;width:100%;height:100%;object-fit:cover;z-index:-2;transition:transform 1.2s}
+.va-card::before{content:"";position:absolute;inset:0;z-index:-1;background:linear-gradient(180deg,rgba(0,0,0,.05) 30%,rgba(0,0,0,.8))}
+.va-grid:hover .va-card{flex:.7}
+.va-grid .va-card:hover{flex:1.6}
+.va-card:hover>img{transform:scale(1.05)}
+.va-num{position:absolute;top:30px;left:30px;font-size:15px;opacity:.7}
+.va-row{display:flex;justify-content:space-between;align-items:flex-end;gap:20px}
+.va-card h3{font-size:49px;font-weight:500;letter-spacing:-1.47px;line-height:1}
+.va-list{display:grid;grid-template-rows:0fr;transition:grid-template-rows .6s,opacity .5s,margin .6s;opacity:0}
+.va-list>div{overflow:hidden;display:flex;flex-wrap:wrap;gap:8px;max-width:520px}
+.va-card:hover .va-list{grid-template-rows:1fr;opacity:1;margin-bottom:26px}
+.va-list span{padding:9px 16px;border-radius:30px;background:rgba(255,255,255,.14);border:1px solid rgba(255,255,255,.25);backdrop-filter:blur(8px);font-size:14px;white-space:nowrap}
+.va-card:hover .arrow{transform:translate(3px,-3px)}
+
+/* ===== B: White card rows ===== */
+.vb-list{display:flex;flex-direction:column;gap:20px}
+.vb-card{display:grid;grid-template-columns:1fr 1.15fr;background:#fff;border-radius:16px;overflow:hidden;min-height:440px}
+.vb-card:nth-child(2){grid-template-columns:1.15fr 1fr}
+.vb-card:nth-child(2) .vb-photo{order:-1}
+.vb-body{padding:40px;display:flex;flex-direction:column;min-width:0}
+.vb-head{display:flex;justify-content:space-between;align-items:flex-start;margin-bottom:30px}
+.vb-num{font-size:15px;color:#fc8535;font-weight:500}
+.vb-body h3{font-size:42px;font-weight:500;letter-spacing:-1.2px;line-height:1;margin-top:10px}
+.vb-items{list-style:none;margin-top:auto;border-top:1px solid rgba(40,40,40,.12)}
+.vb-items li{display:flex;justify-content:space-between;align-items:center;padding:15px 0;border-bottom:1px solid rgba(40,40,40,.12);font-size:17px;transition:color .3s,padding .3s}
+.vb-items li::after{content:"";width:8px;height:8px;border-radius:50%;background:rgba(40,40,40,.18);transition:background .3s,transform .3s}
+.vb-items li:hover{color:#fc8535;padding-left:8px}
+.vb-items li:hover::after{background:#fc8535;transform:scale(1.4)}
+.vb-photo{position:relative;overflow:hidden;margin:10px;border-radius:12px}
+.vb-photo img{position:absolute;inset:0;width:100%;height:100%;object-fit:cover;transition:transform 1.2s}
+.vb-card:hover .vb-photo img{transform:scale(1.05)}
+.vb-card:hover .arrow{transform:translate(3px,-3px)}
+
+/* ===== C: Switcher panel ===== */
+.vc-panel{background:#fff;border-radius:16px;padding:10px;display:grid;grid-template-columns:1fr 1.2fr;gap:10px;min-height:560px}
+.vc-left{padding:30px;display:flex;flex-direction:column;min-width:0}
+.vc-tabs{display:inline-flex;background:#eceef2;border-radius:40px;padding:5px;align-self:flex-start;position:relative}
+.vc-tabs button{position:relative;z-index:1;border:0;background:none;font:500 16px 'Inter',sans-serif;padding:12px 24px;border-radius:40px;cursor:pointer;color:#1e1e1e;transition:color .4s}
+.vc-tabs button.on{color:#fff}
+.vc-pill{position:absolute;top:5px;bottom:5px;left:5px;border-radius:40px;background:#fc8535;transition:left .45s cubic-bezier(.2,.7,.2,1),width .45s cubic-bezier(.2,.7,.2,1)}
+.vc-pane{display:none;flex-direction:column;flex:1;margin-top:40px;animation:vcIn .5s ease}
+.vc-pane.on{display:flex}
+@keyframes vcIn{from{opacity:0;transform:translateY(12px)}to{opacity:1;transform:none}}
+.vc-pane h3{font-size:42px;font-weight:500;letter-spacing:-1.2px;line-height:1;margin-bottom:30px}
+.vc-chips{display:grid;grid-template-columns:1fr 1fr;gap:8px}
+.vc-chips span{background:#eceef2;border-radius:10px;padding:16px 18px;font-size:15px;transition:background .3s,color .3s}
+.vc-chips span:hover{background:#1e1e1e;color:#fff}
+.vc-more{margin-top:auto;padding-top:30px;display:flex;align-items:center;gap:14px;font-weight:500;font-size:16px}
+.vc-more:hover .arrow{transform:translate(3px,-3px)}
+.vc-photos{position:relative;border-radius:12px;overflow:hidden;min-height:360px}
+.vc-photos img{position:absolute;inset:0;width:100%;height:100%;object-fit:cover;opacity:0;transform:scale(1.06);transition:opacity .6s,transform 1.4s cubic-bezier(.2,.7,.2,1)}
+.vc-photos img.on{opacity:1;transform:none}
+
+/* ===== D: Bento ===== */
+.vd-grid{display:grid;grid-template-columns:repeat(4,1fr);grid-auto-rows:170px;gap:20px}
+.vd-photo{position:relative;grid-column:span 2;grid-row:span 3;border-radius:16px;overflow:hidden;color:#fff;padding:30px;display:flex;flex-direction:column;justify-content:space-between;isolation:isolate}
+.vd-photo>img{position:absolute;inset:0;width:100%;height:100%;object-fit:cover;z-index:-2;transition:transform 1.2s}
+.vd-photo::before{content:"";position:absolute;inset:0;z-index:-1;background:linear-gradient(180deg,rgba(0,0,0,.35),rgba(0,0,0,0) 35%,rgba(0,0,0,.7))}
+.vd-photo:hover>img{transform:scale(1.05)}
+.vd-photo h3{font-size:49px;font-weight:500;letter-spacing:-1.47px;line-height:1}
+.vd-photo .vd-row{display:flex;justify-content:space-between;align-items:flex-end}
+.vd-photo:hover .arrow{transform:translate(3px,-3px)}
+.vd-count{align-self:flex-start;padding:7px 16px;border-radius:30px;background:rgba(255,255,255,.14);border:1px solid rgba(255,255,255,.25);backdrop-filter:blur(8px);font-size:14px}
+.vd-tile{background:#fff;border-radius:16px;padding:24px;display:flex;flex-direction:column;justify-content:space-between;transition:background .35s,color .35s,transform .35s}
+.vd-tile i{font-style:normal;font-size:14px;color:#fc8535;font-weight:500;transition:color .35s}
+.vd-tile span{font-size:20px;font-weight:500;letter-spacing:-.4px;line-height:1.15}
+.vd-tile:hover{background:#1e1e1e;color:#fff;transform:translateY(-4px)}
+.vd-tile.accent{background:#fc8535;color:#fff}
+.vd-tile.accent i{color:#fff;opacity:.8}
+.vd-tile.accent:hover{background:#e5751f}
+
+/* ===== responsive ===== */
+@media (max-width:1200px){.wrap{padding:0 24px}}
+@media (max-width:900px){
+  .wrap{padding:0 16px}
+  .variant{padding-top:70px}
+  .title{font-size:32px;letter-spacing:-.9px;margin-bottom:30px}
+  .va-grid{flex-direction:column;height:auto;gap:12px}
+  .va-card,.va-grid:hover .va-card,.va-grid .va-card:hover{flex:none;height:440px}
+  .va-list{grid-template-rows:1fr;opacity:1;margin-bottom:22px}
+  .va-list span{white-space:normal}
+  .va-card h3,.vd-photo h3{font-size:34px;letter-spacing:-1px}
+  .vb-card,.vb-card:nth-child(2){grid-template-columns:1fr}
+  .vb-photo,.vb-card:nth-child(2) .vb-photo{order:-1;height:260px}
+  .vb-body{padding:24px}
+  .vb-body h3,.vc-pane h3{font-size:32px}
+  .vc-panel{grid-template-columns:1fr}
+  .vc-left{padding:16px}
+  .vc-photos{order:-1;min-height:260px}
+  .vc-chips{grid-template-columns:1fr}
+  .vd-grid{grid-template-columns:1fr 1fr;grid-auto-rows:130px;gap:12px}
+  .vd-photo{grid-row:span 3;padding:22px}
+  .vd-tile{padding:16px}
+  .vd-tile span{font-size:16px}
+}
+</style>
+</head>
+<body>
+
+<div class="wrap top-note">
+  <h1>Варианты блока «Детейлинг и русификация»</h1>
+  Тексты те же, меняется только подача. Наведите курсор на карточки, чтобы увидеть анимацию. Сейчас на сайте стоит текущий вариант с двумя фото-карточками и плашками.
+</div>
+
+<!-- ============ A ============ -->
+<section class="variant">
+  <div class="wrap">
+    <div class="v-label"><b>A</b> Раскрывающаяся галерея: карточка под курсором расширяется, список услуг выезжает снизу</div>
+    <span class="tag">услуги</span>
+    <h2 class="title">Детейлинг и&nbsp;русификация</h2>
+    <div class="va-grid">
+      <a href="https://grafit-service.ru/detailing" class="va-card">
+        <img src="assets/site/detailing.jpg" alt="Детейлинг">
+        <span class="va-num">01</span>
+        <div class="va-list"><div>
+          <span>керамика и полировка</span><span>антикор арок</span><span>химчистка</span><span>шиномонтаж</span><span>шумоизоляция</span><span>оклейка кузова</span>
+        </div></div>
+        <div class="va-row"><h3>Детейлинг</h3><span class="arrow"><svg viewBox="0 0 18 18" fill="none"><path d="M4 14L14 4M14 14V4H4" stroke="#fff" stroke-width="2" stroke-linecap="round"/></svg></span></div>
+      </a>
+      <a href="https://grafit-service.ru/russification" class="va-card">
+        <img src="assets/site/russification.jpg" alt="Русификация">
+        <span class="va-num">02</span>
+        <div class="va-list"><div>
+          <span>магазин приложений</span><span>помощь с мастер-аккаунтом</span><span>адаптивные приложения</span><span>сим-карты</span>
+        </div></div>
+        <div class="va-row"><h3>Русификация</h3><span class="arrow"><svg viewBox="0 0 18 18" fill="none"><path d="M4 14L14 4M14 14V4H4" stroke="#fff" stroke-width="2" stroke-linecap="round"/></svg></span></div>
+      </a>
+    </div>
+  </div>
+</section>
+
+<!-- ============ B ============ -->
+<section class="variant">
+  <div class="wrap">
+    <div class="v-label"><b>B</b> Белые карточки «текст + фото» в шахматном порядке, услуги нумерованным списком с линиями</div>
+    <span class="tag">услуги</span>
+    <h2 class="title">Детейлинг и&nbsp;русификация</h2>
+    <div class="vb-list">
+      <a href="https://grafit-service.ru/detailing" class="vb-card">
+        <div class="vb-body">
+          <div class="vb-head"><div><span class="vb-num">01</span><h3>Детейлинг</h3></div><span class="arrow"><svg viewBox="0 0 18 18" fill="none"><path d="M4 14L14 4M14 14V4H4" stroke="#fff" stroke-width="2" stroke-linecap="round"/></svg></span></div>
+          <ul class="vb-items"><li>Керамика и полировка</li><li>Антикор арок</li><li>Химчистка</li><li>Шиномонтаж</li><li>Шумоизоляция</li><li>Оклейка кузова</li></ul>
+        </div>
+        <div class="vb-photo"><img src="assets/site/detailing.jpg" alt="Детейлинг"></div>
+      </a>
+      <a href="https://grafit-service.ru/russification" class="vb-card">
+        <div class="vb-body">
+          <div class="vb-head"><div><span class="vb-num">02</span><h3>Русификация</h3></div><span class="arrow"><svg viewBox="0 0 18 18" fill="none"><path d="M4 14L14 4M14 14V4H4" stroke="#fff" stroke-width="2" stroke-linecap="round"/></svg></span></div>
+          <ul class="vb-items"><li>Магазин приложений</li><li>Помощь с мастер-аккаунтом</li><li>Адаптивные приложения</li><li>Сим-карты</li></ul>
+        </div>
+        <div class="vb-photo"><img src="assets/site/russification.jpg" alt="Русификация"></div>
+      </a>
+    </div>
+  </div>
+</section>
+
+<!-- ============ C ============ -->
+<section class="variant">
+  <div class="wrap">
+    <div class="v-label"><b>C</b> Одна панель с переключателем: как блок ТО, экономит место по высоте</div>
+    <span class="tag">услуги</span>
+    <h2 class="title">Детейлинг и&nbsp;русификация</h2>
+    <div class="vc-panel">
+      <div class="vc-left">
+        <div class="vc-tabs" id="vcTabs">
+          <span class="vc-pill"></span>
+          <button class="on" data-i="0">Детейлинг</button>
+          <button data-i="1">Русификация</button>
+        </div>
+        <div class="vc-pane on">
+          <h3>Детейлинг</h3>
+          <div class="vc-chips"><span>керамика и полировка</span><span>антикор арок</span><span>химчистка</span><span>шиномонтаж</span><span>шумоизоляция</span><span>оклейка кузова</span></div>
+          <a class="vc-more" href="https://grafit-service.ru/detailing"><span class="arrow"><svg viewBox="0 0 18 18" fill="none"><path d="M4 14L14 4M14 14V4H4" stroke="#fff" stroke-width="2" stroke-linecap="round"/></svg></span>Подробнее о детейлинге</a>
+        </div>
+        <div class="vc-pane">
+          <h3>Русификация</h3>
+          <div class="vc-chips"><span>магазин приложений</span><span>помощь с мастер-аккаунтом</span><span>адаптивные приложения</span><span>сим-карты</span></div>
+          <a class="vc-more" href="https://grafit-service.ru/russification"><span class="arrow"><svg viewBox="0 0 18 18" fill="none"><path d="M4 14L14 4M14 14V4H4" stroke="#fff" stroke-width="2" stroke-linecap="round"/></svg></span>Подробнее о русификации</a>
+        </div>
+      </div>
+      <div class="vc-photos">
+        <img class="on" src="assets/site/detailing.jpg" alt="Детейлинг">
+        <img src="assets/site/russification.jpg" alt="Русификация">
+      </div>
+    </div>
+  </div>
+</section>
+
+<!-- ============ D ============ -->
+<section class="variant">
+  <div class="wrap">
+    <div class="v-label"><b>D</b> Бенто-сетка: фото-карточка + каждая услуга отдельной плиткой, плюс оранжевая плитка записи</div>
+    <span class="tag">услуги</span>
+    <h2 class="title">Детейлинг и&nbsp;русификация</h2>
+    <div class="vd-grid">
+      <a href="https://grafit-service.ru/detailing" class="vd-photo">
+        <img src="assets/site/detailing.jpg" alt="Детейлинг">
+        <span class="vd-count">6 услуг</span>
+        <div class="vd-row"><h3>Детейлинг</h3><span class="arrow"><svg viewBox="0 0 18 18" fill="none"><path d="M4 14L14 4M14 14V4H4" stroke="#fff" stroke-width="2" stroke-linecap="round"/></svg></span></div>
+      </a>
+      <a class="vd-tile" href="https://grafit-service.ru/detailing"><i>01</i><span>Керамика и полировка</span></a>
+      <a class="vd-tile" href="https://grafit-service.ru/detailing"><i>02</i><span>Антикор арок</span></a>
+      <a class="vd-tile" href="https://grafit-service.ru/detailing"><i>03</i><span>Химчистка</span></a>
+      <a class="vd-tile" href="https://grafit-service.ru/detailing"><i>04</i><span>Шиномонтаж</span></a>
+      <a class="vd-tile" href="https://grafit-service.ru/detailing"><i>05</i><span>Шумоизоляция</span></a>
+      <a class="vd-tile" href="https://grafit-service.ru/detailing"><i>06</i><span>Оклейка кузова</span></a>
+
+      <a class="vd-tile" href="https://grafit-service.ru/russification"><i>01</i><span>Магазин приложений</span></a>
+      <a class="vd-tile" href="https://grafit-service.ru/russification"><i>02</i><span>Помощь с мастер-аккаунтом</span></a>
+      <a href="https://grafit-service.ru/russification" class="vd-photo">
+        <img src="assets/site/russification.jpg" alt="Русификация">
+        <span class="vd-count">4 услуги</span>
+        <div class="vd-row"><h3>Русификация</h3><span class="arrow"><svg viewBox="0 0 18 18" fill="none"><path d="M4 14L14 4M14 14V4H4" stroke="#fff" stroke-width="2" stroke-linecap="round"/></svg></span></div>
+      </a>
+      <a class="vd-tile" href="https://grafit-service.ru/russification"><i>03</i><span>Адаптивные приложения</span></a>
+      <a class="vd-tile" href="https://grafit-service.ru/russification"><i>04</i><span>Сим-карты</span></a>
+      <a class="vd-tile accent" href="index.html#contact" style="grid-column:span 2"><i>запись</i><span>Записаться в&nbsp;техцентр →</span></a>
+    </div>
+  </div>
+</section>
+
+<div style="height:120px"></div>
+
+<script>
+(function(){
+  var tabs=document.getElementById('vcTabs'),btns=tabs.querySelectorAll('button'),pill=tabs.querySelector('.vc-pill');
+  var panes=document.querySelectorAll('.vc-pane'),imgs=document.querySelectorAll('.vc-photos img');
+  function place(b){pill.style.left=b.offsetLeft+'px';pill.style.width=b.offsetWidth+'px'}
+  btns.forEach(function(b){b.addEventListener('click',function(){
+    var i=+b.dataset.i;
+    btns.forEach(function(x){x.classList.toggle('on',x===b)});
+    panes.forEach(function(p,j){p.classList.toggle('on',j===i)});
+    imgs.forEach(function(m,j){m.classList.toggle('on',j===i)});
+    place(b);
+  })});
+  window.addEventListener('load',function(){place(tabs.querySelector('.on'))});
+  window.addEventListener('resize',function(){place(tabs.querySelector('.on'))});
+  place(btns[0]);
+})();
+</script>
+</body>
+</html>
