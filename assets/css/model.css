@@ -66,7 +66,7 @@
 .svc-price small { font-size: 13px; color: #fc8535; background: #fff2e9; border-radius: 30px; padding: 5px 11px; }
 
 /* ===== PRICE LIST ===== */
-.price-grid { display: grid; grid-template-columns: 1fr 1fr; gap: 20px; align-items: start; }
+.price-grid { display: grid; grid-template-columns: 1fr 1fr; gap: 20px; align-items: stretch; }
 .price-col { display: flex; flex-direction: column; gap: 20px; min-width: 0; }
 .price-card { background: #fff; border-radius: 16px; padding: 36px 40px; }
 .price-card h3 { font-size: 26px; font-weight: 500; letter-spacing: -0.8px; margin-bottom: 18px; }
