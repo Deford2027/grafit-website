@@ -9,23 +9,34 @@
 }
 .hero--model .hero-content { padding-top: 70px; }
 .hero--model .hero-title { max-width: 720px; }
+.hero--model .hero-subtitle { max-width: 460px; margin-bottom: 28px; }
 .crumbs { display: flex; flex-wrap: wrap; gap: 8px; font-size: 14px; color: rgba(255,255,255,0.5); margin-bottom: 40px; }
 .crumbs a { color: rgba(255,255,255,0.75); transition: color 0.3s; }
 .crumbs a:hover { color: #fc8535; }
 .crumbs span[aria-current] { color: #fff; }
-.hero-points { list-style: none; display: flex; flex-wrap: wrap; gap: 8px; max-width: 640px; margin-bottom: 18px; }
-.hero-points li {
-  padding: 10px 16px;
-  border-radius: 30px;
-  background: rgba(255,255,255,0.1);
-  border: 1px solid rgba(255,255,255,0.18);
-  backdrop-filter: blur(8px);
-  -webkit-backdrop-filter: blur(8px);
-  color: #fff;
-  font-size: 14px;
+.hero-points {
+  list-style: none;
+  display: grid;
+  grid-template-columns: repeat(2, max-content);
+  gap: 12px 40px;
+  margin: 6px 0 40px;
 }
-.hero-points li b { color: #fc8535; font-weight: 600; }
-.hero-note { font-size: 15px; color: rgba(255,255,255,0.7); margin-bottom: 36px; }
+.hero-points li {
+  position: relative;
+  padding-left: 18px;
+  font-size: 15px;
+  line-height: 1.35;
+  color: rgba(255,255,255,0.85);
+}
+.hero-points li::before {
+  content: "";
+  position: absolute;
+  left: 0; top: 7px;
+  width: 6px; height: 6px;
+  border-radius: 50%;
+  background: #fc8535;
+}
+.hero-points li b { color: #fff; font-weight: 500; }
 .feature-card .feature-num { font-size: 15px; color: #fc8535; margin-bottom: auto; }
 
 /* section head with side lead */
@@ -214,7 +225,8 @@
 @media (max-width: 900px) {
   .hero--model .hero-content { padding-top: 40px; }
   .crumbs { margin-bottom: 24px; font-size: 13px; }
-  .hero-points li { font-size: 13px; padding: 8px 13px; }
+  .hero-points { grid-template-columns: 1fr; gap: 10px; margin-bottom: 30px; }
+  .hero-points li { font-size: 14px; }
   .section-head { flex-direction: column; align-items: flex-start; }
   .svc-grid { grid-template-columns: 1fr; gap: 12px; }
   .svc-card, .svc-card.wide { grid-column: auto; min-height: 0; padding: 24px; }
