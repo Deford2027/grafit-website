@@ -815,23 +815,35 @@ a { text-decoration: none; }
   position: relative;
   border-radius: 16px;
   overflow: hidden;
-  background: radial-gradient(120% 90% at 50% 100%, #ffffff 0%, #e4e7ec 70%);
+  background: #1e1e1e;
   display: flex;
   flex-direction: column;
   justify-content: space-between;
   padding: 40px;
   min-height: 556px;
+  isolation: isolate;
 }
-.form-visual-chips { display: flex; flex-wrap: wrap; gap: 8px; }
+.form-visual::after {
+  content: "";
+  position: absolute;
+  inset: 0;
+  z-index: -1;
+  background: linear-gradient(180deg, #1e1e1e 0%, #1e1e1e 22%, rgba(30,30,30,0) 52%);
+}
+.form-visual-chips { position: relative; display: flex; flex-wrap: wrap; gap: 8px; }
 .form-visual-chips span {
   padding: 10px 18px;
   border-radius: 30px;
-  background: #fff;
+  background: rgba(30,30,30,0.55);
+  border: 1px solid rgba(255,255,255,0.18);
+  backdrop-filter: blur(8px);
+  -webkit-backdrop-filter: blur(8px);
   font-size: 14px;
-  color: #282828;
+  color: #fff;
 }
-.form-car { width: 108%; max-width: none; margin-left: -4%; }
-.form-panel.visible .form-car { animation: carDriveIn 1.2s cubic-bezier(.2,.7,.2,1) both; }
+.form-car { position: absolute; left: 0; right: 0; bottom: 0; width: 100%; height: auto; max-width: none; z-index: -2; transform-origin: 50% 100%; transform: scale(1.06); transition: transform 1.6s cubic-bezier(.2,.7,.2,1); }
+.form-panel.visible .form-car { transform: none; }
+.form-visual:hover .form-car { transform: scale(1.03); }
 @keyframes carDriveIn { from { transform: translateX(-80px); opacity: 0; } to { transform: none; opacity: 1; } }
 
 /* ===== CONTACTS ===== */
@@ -1534,7 +1546,7 @@ a { text-decoration: none; }
           <span>12 месяцев гарантии</span>
           <span>Консьерж-сервис</span>
         </div>
-        <img class="form-car" src="assets/site/form-car.png" alt="LiXiang" loading="lazy">
+        <img class="form-car" src="assets/site/about-2.jpg" alt="ZEEKR в техцентре GRAFIT" loading="lazy">
       </div>
     </div>
   </section>
