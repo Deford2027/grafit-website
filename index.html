@@ -4,9 +4,7 @@
 <meta charset="UTF-8">
 <meta name="viewport" content="width=device-width, initial-scale=1.0">
 <title>GRAFIT — Сервис, русификация и ремонт китайских автомобилей</title>
-<link rel="stylesheet" href="https://fonts.googleapis.com/css2?family=Inter:wght@400;500;600;700;800&display=swap">
-<link rel="stylesheet" href="https://cdnjs.cloudflare.com/ajax/libs/leaflet/1.9.4/leaflet.min.css">
-<style>
+<link rel="stylesheet" href="https://fonts.googleapis.com/css2?family=Inter:wght@400;500;600;700;800&display=swap"><style>
 * { margin: 0; padding: 0; box-sizing: border-box; }
 body {
   background: #eceef2;
@@ -900,15 +898,8 @@ a { text-decoration: none; }
 .map-reset:hover { background: #e5751f; }
 .partners [data-ll].on-map { background: #fc8535; border-color: #fc8535; color: #fff; }
 .map-canvas { position: absolute; inset: 0; z-index: 0; background: #e4e7ec; font-family: 'Inter', sans-serif; }
-.map-canvas .leaflet-tile-pane { filter: grayscale(1) contrast(0.95); }
+.map-canvas [class*="ground-pane"] { filter: grayscale(1); }
 .map-reset { z-index: 500; }
-.grafit-pin { width: 34px; height: 34px; border-radius: 50% 50% 50% 0; background: #fc8535; transform: rotate(-45deg); box-shadow: 0 6px 16px rgba(252,133,53,0.45); display: grid; place-items: center; border: 3px solid #fff; }
-.grafit-pin::after { content: ""; width: 8px; height: 8px; border-radius: 50%; background: #fff; }
-.grafit-pin.main { width: 44px; height: 44px; background: #1e1e1e; box-shadow: 0 8px 20px rgba(0,0,0,0.35); }
-.grafit-pin.main::after { background: #fc8535; width: 10px; height: 10px; }
-.map-canvas .leaflet-popup-content-wrapper { border-radius: 12px; box-shadow: 0 10px 30px rgba(0,0,0,0.15); }
-.map-canvas .leaflet-popup-content { margin: 14px 18px; font-size: 13px; line-height: 1.45; color: rgba(40,40,40,0.7); }
-.map-canvas .leaflet-popup-content b { display: block; font-size: 15px; font-weight: 600; color: #1e1e1e; margin-bottom: 4px; }
 
 /* ===== FOOTER ===== */
 .footer { padding: 20px 0 30px; }
@@ -1741,12 +1732,12 @@ form.addEventListener('submit', function(e) {
   })();
 
 </script>
-<script src="https://cdnjs.cloudflare.com/ajax/libs/leaflet/1.9.4/leaflet.min.js"></script>
+<script src="https://api-maps.yandex.ru/2.1/?lang=ru_RU&amp;apikey=5e9f9d66-a12d-4c6b-90b4-e7614f7d5698"></script>
 <script>
-  // Map of GRAFIT tech centers (data from the old site); clicking an address flies to it
-  (function(){
+  // Yandex map of GRAFIT tech centers (same API key and markers as grafit-service.ru)
+  if (window.ymaps) ymaps.ready(function(){
     var el=document.getElementById('grafitMap'),reset=document.getElementById('mapReset');
-    if(!el||!window.L) return;
+    if(!el) return;
     var centers=[
       {ll:[55.811351,37.652382],t:'GRAFIT, Москва, Маломосковская ул., 22, стр. 2',d:'Техцентр работает Пн-пт, с 10-00 до 20-00.',main:true},
       {ll:[44.568263,33.514778],t:'GRAFIT, г. Севастополь, Промышленная, 9',d:'Техцентр работает Пн-пт, с 09-00 до 17-00.'},
@@ -1755,39 +1746,35 @@ form.addEventListener('submit', function(e) {
       {ll:[45.071548,38.989686],t:'GRAFIT, г. Краснодар, Солнечная, 4Б',d:'Техцентр работает Пн-пт, с 10-00 до 20-00.'},
       {ll:[56.85807,60.566285],t:'GRAFIT, г. Екатеринбург, ул. Черепанова, 23Б',d:'Техцентр работает Пн-пт, с 10-00 до 19-00.'}
     ];
-    var map=L.map(el,{scrollWheelZoom:false,zoomControl:true,attributionControl:true});
-    L.tileLayer('https://{s}.basemaps.cartocdn.com/light_all/{z}/{x}/{y}{r}.png',{
-      maxZoom:19,subdomains:'abcd',attribution:'&copy; OpenStreetMap &copy; CARTO'
-    }).addTo(map);
-    var markers={},bounds=L.latLngBounds([]);
+    var map=new ymaps.Map(el,{center:[55.751979,37.617499],zoom:4,controls:['zoomControl','fullscreenControl']},{suppressMapOpenBlock:true});
+    map.behaviors.disable('scrollZoom');
+    el.addEventListener('click',function(){map.behaviors.enable('scrollZoom')});
+    el.addEventListener('mouseleave',function(){map.behaviors.disable('scrollZoom')});
+    var markers={},col=new ymaps.GeoObjectCollection();
     centers.forEach(function(c){
-      var size=c.main?44:34;
-      var icon=L.divIcon({className:'',html:'<div class="grafit-pin'+(c.main?' main':'')+'"></div>',iconSize:[size,size],iconAnchor:[size/2,size*1.2],popupAnchor:[0,-size*1.1]});
-      markers[c.ll.join(',')]=L.marker(c.ll,{icon:icon}).addTo(map).bindPopup('<b>'+c.t+'</b>'+c.d);
-      bounds.extend(c.ll);
+      var pm=new ymaps.Placemark(c.ll,{balloonContentHeader:c.t,balloonContentBody:c.d,hintContent:c.t},
+        {preset:c.main?'islands#blackDotIcon':'islands#orangeDotIcon',iconColor:c.main?'#1e1e1e':'#fc8535'});
+      markers[c.ll.join(',')]=pm; col.add(pm);
     });
-    function showAll(){map.fitBounds(bounds,{padding:[50,50]})}
+    map.geoObjects.add(col);
+    function showAll(){map.setBounds(col.getBounds(),{checkZoomRange:true,zoomMargin:40})}
     showAll();
-    map.on('focus click',function(){map.scrollWheelZoom.enable()});
-    map.on('mouseout',function(){map.scrollWheelZoom.disable()});
     var links=document.querySelectorAll('#contacts [data-ll]');
     links.forEach(function(a){a.addEventListener('click',function(e){
       if(e.metaKey||e.ctrlKey||e.shiftKey) return;
       e.preventDefault();
       var p=a.dataset.ll.split(','),ll=[+p[1],+p[0]],m=markers[ll.join(',')];
-      map.flyTo(ll,15,{duration:1.2});
-      if(m) map.once('moveend',function(){m.openPopup()});
+      map.setCenter(ll,15,{duration:600}).then(function(){if(m) m.balloon.open()});
       links.forEach(function(x){x.classList.toggle('on-map',x===a)});
       reset.hidden=false;
       if(window.innerWidth<=900) el.scrollIntoView({behavior:'smooth',block:'center'});
     })});
     reset.addEventListener('click',function(){
-      map.closePopup(); map.flyToBounds(bounds,{padding:[50,50],duration:1.2}); reset.hidden=true;
+      map.balloon.close(); showAll(); reset.hidden=true;
       links.forEach(function(x){x.classList.remove('on-map')});
     });
-    // section fades in: recompute size once visible
-    window.addEventListener('load',function(){map.invalidateSize();showAll()});
-  })();
+    window.addEventListener('load',function(){map.container.fitToViewport();showAll()});
+  });
 </script>
 </body>
 </html>
