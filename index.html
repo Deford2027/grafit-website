@@ -530,7 +530,27 @@ a { text-decoration: none; }
   font-weight: 500;
   color: #fc8535;
 }
-.check-list li:hover { color: #fc8535; transform: translateX(4px); }
+.check-list li { cursor: pointer; outline: none; align-items: flex-start; }
+.check-list li::after {
+  content: "";
+  flex-shrink: 0;
+  width: 16px;
+  height: 16px;
+  margin: 3px 0 0 auto;
+  background: url("data:image/svg+xml,%3Csvg xmlns='http://www.w3.org/2000/svg' width='16' height='16' viewBox='0 0 16 16' fill='none'%3E%3Cpath d='M6 4L10 8L6 12' stroke='%23fc8535' stroke-width='1.6' stroke-linejoin='round'/%3E%3C/svg%3E") center no-repeat;
+  opacity: 0;
+  transform: translateX(-6px);
+  transition: opacity 0.3s, transform 0.3s;
+}
+.check-list li:hover, .check-list li.active, .check-list li:focus-visible { color: #fc8535; transform: translateX(4px); }
+.check-list li.active::after, .check-list li:hover::after { opacity: 1; transform: none; }
+.to-photos img {
+  opacity: 0;
+  transform: scale(1.06);
+  transition: opacity 0.6s ease, transform 1.4s cubic-bezier(.2,.7,.2,1);
+}
+.to-photos img.active { opacity: 1; transform: none; }
+.to-photos:hover img.active { transform: scale(1.02); }
 
 /* ===== BRANDS ===== */
 .brands-grid {
@@ -1252,21 +1272,29 @@ a { text-decoration: none; }
     <div class="split">
       <div class="split-card fade-up">
         <h3>Техническое обслуживание китайских автомобилей включает:</h3>
-        <ul class="check-list">
-          <li>Плановое ТО по регламенту производителя</li>
-          <li>Компьютерная диагностика всех систем</li>
-          <li>Замена масла и технических жидкостей, фильтров, свечей</li>
-          <li>Обслуживание гибридных и электрических автомобилей (проверка ВВ-батареи, силовой электроники)</li>
-          <li>Проверка и обслуживание тормозной системы</li>
-          <li>Диагностика и ремонт подвески, рулевого управления</li>
-          <li>Обслуживание АКПП, вариатора, робота</li>
+        <ul class="check-list" id="toList">
+          <li data-photo="0" class="active" tabindex="0">Плановое ТО по регламенту производителя</li>
+          <li data-photo="1" tabindex="0">Компьютерная диагностика всех систем</li>
+          <li data-photo="2" tabindex="0">Замена масла и технических жидкостей, фильтров, свечей</li>
+          <li data-photo="3" tabindex="0">Обслуживание гибридных и электрических автомобилей (проверка ВВ-батареи, силовой электроники)</li>
+          <li data-photo="4" tabindex="0">Проверка и обслуживание тормозной системы</li>
+          <li data-photo="5" tabindex="0">Диагностика и ремонт подвески, рулевого управления</li>
+          <li data-photo="6" tabindex="0">Обслуживание АКПП, вариатора, робота</li>
         </ul>
         <a href="#contact" class="btn-primary">
           Записаться в техцентр
           <svg width="16" height="16" viewBox="0 0 16 16" fill="none"><path d="M6 4L10 8L6 12" stroke-width="1.6" stroke-linejoin="round" stroke="white"/></svg>
         </a>
       </div>
-      <div class="split-photo fade-up fade-up-delay-1"><img src="assets/site/advantages.jpg" alt="Автомобили в техцентре GRAFIT" loading="lazy"></div>
+      <div class="split-photo to-photos fade-up fade-up-delay-1" id="toPhotos">
+        <img src="assets/site/to-1.jpg" alt="Плановое ТО в техцентре GRAFIT" class="active" loading="eager">
+        <img src="assets/site/to-2.jpg" alt="Компьютерная диагностика" loading="lazy">
+        <img src="assets/site/to-3.jpg" alt="Моторный отсек автомобиля" loading="lazy">
+        <img src="assets/site/to-4.jpg" alt="Зарядка электромобиля ZEEKR" loading="lazy">
+        <img src="assets/site/to-5.jpg" alt="Мастер GRAFIT у колеса" loading="lazy">
+        <img src="assets/site/to-6.jpg" alt="Ремонт подвески" loading="lazy">
+        <img src="assets/site/to-7.jpg" alt="Салон автомобиля" loading="lazy">
+      </div>
     </div>
   </section>
 
@@ -1649,6 +1677,21 @@ next.addEventListener('click', function() { track.scrollBy({ left: step() }); })
 track.addEventListener('scroll', updateArrows, { passive: true });
 window.addEventListener('resize', updateArrows);
 updateArrows();
+
+var toItems = document.querySelectorAll('#toList li');
+var toImgs = document.querySelectorAll('#toPhotos img');
+function showToPhoto(li) {
+  toItems.forEach(function(el) { el.classList.toggle('active', el === li); });
+  toImgs.forEach(function(img, i) { img.classList.toggle('active', i === +li.dataset.photo); });
+}
+toItems.forEach(function(li) {
+  li.addEventListener('mouseenter', function() { showToPhoto(li); });
+  li.addEventListener('focus', function() { showToPhoto(li); });
+  li.addEventListener('click', function() { showToPhoto(li); });
+});
+window.addEventListener('load', function() {
+  toImgs.forEach(function(img) { img.loading = 'eager'; });
+});
 
 var brandSelect = document.getElementById('fBrand');
 document.querySelectorAll('.brand-tile').forEach(function(tile) {
