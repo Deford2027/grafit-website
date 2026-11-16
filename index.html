@@ -865,7 +865,10 @@ a { text-decoration: none; }
   transition: border-color 0.3s, color 0.3s;
 }
 .partners a:hover { border-color: #fc8535; color: #fc8535; }
-.map-card { border-radius: 16px; overflow: hidden; min-height: 556px; background: #e4e7ec; }
+.map-card { position: relative; border-radius: 16px; overflow: hidden; min-height: 556px; background: #e4e7ec; }
+.map-reset { position: absolute; left: 16px; bottom: 16px; border: 0; border-radius: 30px; background: #fc8535; color: #fff; font: 500 14px 'Inter', sans-serif; padding: 11px 18px; cursor: pointer; box-shadow: 0 6px 18px rgba(0,0,0,0.15); transition: background 0.3s; }
+.map-reset:hover { background: #e5751f; }
+.partners [data-ll].on-map { background: #fc8535; border-color: #fc8535; color: #fff; }
 .map-card iframe { width: 100%; height: 100%; min-height: 556px; border: 0; display: block; }
 
 /* ===== FOOTER ===== */
@@ -1543,7 +1546,7 @@ a { text-decoration: none; }
         <h2>Контакты</h2>
         <div class="contact-lines">
           <div class="contact-line"><small>Телефон</small><a class="big" href="tel:+79962996939">+7 996 299 69 39</a></div>
-          <div class="contact-line"><small>Техцентр</small><a href="https://yandex.by/maps/-/CXGajSzH" target="_blank" rel="noopener">г. Москва, Маломосковская ул., 22, стр. 2</a></div>
+          <div class="contact-line"><small>Техцентр</small><a href="https://yandex.by/maps/-/CXGajSzH" target="_blank" rel="noopener" data-ll="37.652382,55.811351">г. Москва, Маломосковская ул., 22, стр. 2</a></div>
           <div class="contact-line"><small>График работы</small><span>Пн-Пт: 10-00 – 20-00</span></div>
         </div>
         <div class="socials">
@@ -1553,16 +1556,17 @@ a { text-decoration: none; }
         <div class="partners">
           <small>Партнёрам/Сотрудничество</small>
           <ul>
-            <li><a href="https://yandex.by/maps/-/CXGanQk0" target="_blank" rel="noopener">г. Севастополь, Промышленная, 9</a></li>
-            <li><a href="https://yandex.by/maps/-/CXGan0~q" target="_blank" rel="noopener">г. Махачкала, пр-т Насрутдинова, 252Б</a></li>
-            <li><a href="https://yandex.by/maps/-/CXGarI5D" target="_blank" rel="noopener">г. Уфа, 50 лет СССР, 39, корп.11</a></li>
-            <li><a href="https://yandex.by/maps/-/CXGarRMN" target="_blank" rel="noopener">г. Краснодар, Солнечная, 4Б</a></li>
-            <li><a href="https://yandex.by/maps/-/CXGarOpm" target="_blank" rel="noopener">г. Екатеринбург, ул. Черепанова, 23Б</a></li>
+            <li><a href="https://yandex.by/maps/-/CXGanQk0" target="_blank" rel="noopener" data-ll="33.514778,44.568263">г. Севастополь, Промышленная, 9</a></li>
+            <li><a href="https://yandex.by/maps/-/CXGan0~q" target="_blank" rel="noopener" data-ll="47.603119,42.917163">г. Махачкала, пр-т Насрутдинова, 252Б</a></li>
+            <li><a href="https://yandex.by/maps/-/CXGarI5D" target="_blank" rel="noopener" data-ll="56.023514,54.750058">г. Уфа, 50 лет СССР, 39, корп.11</a></li>
+            <li><a href="https://yandex.by/maps/-/CXGarRMN" target="_blank" rel="noopener" data-ll="38.989686,45.071548">г. Краснодар, Солнечная, 4Б</a></li>
+            <li><a href="https://yandex.by/maps/-/CXGarOpm" target="_blank" rel="noopener" data-ll="60.566285,56.85807">г. Екатеринбург, ул. Черепанова, 23Б</a></li>
           </ul>
         </div>
       </div>
       <div class="map-card fade-up fade-up-delay-1">
-        <iframe src="https://yandex.ru/map-widget/v1/?text=%D0%9C%D0%BE%D1%81%D0%BA%D0%B2%D0%B0%2C%20%D0%9C%D0%B0%D0%BB%D0%BE%D0%BC%D0%BE%D1%81%D0%BA%D0%BE%D0%B2%D1%81%D0%BA%D0%B0%D1%8F%20%D1%83%D0%BB%D0%B8%D1%86%D0%B0%2C%2022%D1%812&amp;z=16" title="GRAFIT на карте" loading="lazy" allowfullscreen></iframe>
+        <iframe id="grafitMap" src="https://yandex.ru/map-widget/v1/?ll=46.8%2C50.2&amp;z=4&amp;pt=37.652382%2C55.811351%2Cpm2orl~33.514778%2C44.568263%2Cpm2orm~47.603119%2C42.917163%2Cpm2orm~56.023514%2C54.750058%2Cpm2orm~38.989686%2C45.071548%2Cpm2orm~60.566285%2C56.85807%2Cpm2orm" title="Техцентры GRAFIT на карте" allowfullscreen></iframe>
+        <button type="button" class="map-reset" id="mapReset" hidden>Все техцентры</button>
       </div>
     </div>
   </section>
@@ -1695,6 +1699,25 @@ form.addEventListener('submit', function(e) {
     window.addEventListener('load',function(){re();imgs.forEach(function(m){m.loading='eager'})});
     window.addEventListener('resize',re); re();
     if(document.fonts) document.fonts.ready.then(re);
+  })();
+
+  // Map: click on an address zooms the map to that tech center
+  (function(){
+    var map=document.getElementById('grafitMap'),reset=document.getElementById('mapReset');
+    if(!map) return;
+    var allSrc=map.src,links=document.querySelectorAll('#contacts [data-ll]');
+    links.forEach(function(a){a.addEventListener('click',function(e){
+      if(e.metaKey||e.ctrlKey||e.shiftKey) return;
+      e.preventDefault();
+      map.src=allSrc.replace(/ll=[^&]*/,'ll='+encodeURIComponent(a.dataset.ll)).replace(/z=\d+/,'z=15');
+      links.forEach(function(x){x.classList.toggle('on-map',x===a)});
+      reset.hidden=false;
+      if(window.innerWidth<=900) map.scrollIntoView({behavior:'smooth',block:'center'});
+    })});
+    reset.addEventListener('click',function(){
+      map.src=allSrc; reset.hidden=true;
+      links.forEach(function(x){x.classList.remove('on-map')});
+    });
   })();
 </script>
 </body>
