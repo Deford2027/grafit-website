@@ -609,61 +609,28 @@ a { text-decoration: none; }
 .brand-tile:hover .brand-logo img { filter: none; opacity: 1; transform: scale(1.06); }
 
 /* ===== DETAILING & RUSSIFICATION ===== */
-.duo-grid {
-  display: grid;
-  grid-template-columns: 1fr 1fr;
-  gap: 20px;
-}
-.duo-card {
-  position: relative;
-  height: 556px;
-  border-radius: 16px;
-  overflow: hidden;
-  padding: 30px;
-  display: flex;
-  flex-direction: column;
-  justify-content: space-between;
-  color: #fff;
-  isolation: isolate;
-}
-.duo-card > img {
-  position: absolute;
-  inset: 0;
-  width: 100%;
-  height: 100%;
-  object-fit: cover;
-  z-index: -2;
-  transition: transform 0.8s;
-}
-.duo-card::before {
-  content: "";
-  position: absolute;
-  inset: 0;
-  z-index: -1;
-  background: linear-gradient(180deg, rgba(0,0,0,0.3) 0%, rgba(0,0,0,0) 40%, rgba(0,0,0,0.7) 100%);
-}
-.duo-card:hover > img { transform: scale(1.04); }
-.chips { display: flex; flex-wrap: wrap; gap: 8px; max-width: 480px; }
-.chip {
-  padding: 10px 18px;
-  border-radius: 30px;
-  background: rgba(255,255,255,0.14);
-  border: 1px solid rgba(255,255,255,0.22);
-  backdrop-filter: blur(8px);
-  -webkit-backdrop-filter: blur(8px);
-  font-size: 14px;
-  transition: background 0.3s, border-color 0.3s;
-}
-.chip:hover { background: #fc8535; border-color: #fc8535; }
-.duo-bottom { display: flex; align-items: flex-end; justify-content: space-between; }
-.duo-bottom h3 {
-  font-size: 49px;
-  font-weight: 500;
-  letter-spacing: -1.47px;
-  line-height: 1;
-}
-.duo-card .arrow-btn { transition: transform 0.3s; }
-.duo-card:hover .arrow-btn { transform: translate(3px, -3px); }
+.vc-panel{background:#fff;border-radius:16px;padding:10px;display:grid;grid-template-columns:1fr 1.2fr;gap:10px;min-height:560px}
+.vc-left{padding:30px;display:flex;flex-direction:column;min-width:0}
+.vc-tabs{display:inline-flex;background:#eceef2;border-radius:40px;padding:5px;align-self:flex-start;position:relative}
+.vc-tabs button{position:relative;z-index:1;border:0;background:none;font:500 16px 'Inter',sans-serif;padding:12px 24px;border-radius:40px;cursor:pointer;color:#1e1e1e;transition:color .4s;outline:none;-webkit-tap-highlight-color:transparent}
+.vc-tabs button:focus-visible{box-shadow:0 0 0 2px rgba(252,133,53,.45)}
+.vc-tabs button.on{color:#fff}
+.vc-pill{position:absolute;top:5px;bottom:5px;left:5px;border-radius:40px;background:#fc8535;transition:left .45s cubic-bezier(.2,.7,.2,1),width .45s cubic-bezier(.2,.7,.2,1)}
+.vc-pane{display:none;flex-direction:column;flex:1;margin-top:40px;animation:vcIn .5s ease}
+.vc-pane.on{display:flex}
+@keyframes vcIn{from{opacity:0;transform:translateY(12px)}to{opacity:1;transform:none}}
+.vc-pane h3{font-size:42px;font-weight:500;letter-spacing:-1.2px;line-height:1;margin-bottom:30px}
+.vc-chips{display:grid;grid-template-columns:1fr 1fr;gap:8px}
+.vc-chips span{background:#eceef2;border-radius:10px;padding:16px 18px;font-size:15px;transition:background .3s,color .3s}
+.vc-chips span:hover{background:#1e1e1e;color:#fff}
+.vc-more{color:#1e1e1e;text-decoration:none;transition:color .3s;margin-top:auto;padding-top:30px;display:flex;align-items:center;gap:14px;font-weight:500;font-size:16px;align-self:flex-start}
+.arrow-sq{width:45px;height:45px;flex-shrink:0;border-radius:5px;background:#fc8535;display:grid;place-items:center;transition:transform .3s,background .3s}
+.arrow-sq svg{width:18px;height:18px}
+.vc-more:hover{color:#fc8535}
+.vc-more:hover .arrow-sq{transform:translate(3px,-3px);background:#e5751f}
+.vc-photos{position:relative;border-radius:12px;overflow:hidden;min-height:360px}
+.vc-photos img{position:absolute;inset:0;width:100%;height:100%;object-fit:cover;opacity:0;transform:scale(1.06);transition:opacity .6s,transform 1.4s cubic-bezier(.2,.7,.2,1)}
+.vc-photos img.on{opacity:1;transform:none}
 
 /* ===== ADVANTAGES ===== */
 .adv-grid {
@@ -967,7 +934,13 @@ a { text-decoration: none; }
 @media (max-width: 900px) {
   .section { padding-top: 70px; }
   .section-head { flex-direction: column; align-items: flex-start; gap: 16px; margin-bottom: 24px; }
-  .split, .duo-grid { grid-template-columns: 1fr; gap: 12px; }
+  .split { grid-template-columns: 1fr; gap: 12px; }
+  .vc-panel { grid-template-columns: 1fr; min-height: 0; }
+  .vc-left { padding: 16px; }
+  .vc-photos { order: -1; min-height: 260px; }
+  .vc-chips { grid-template-columns: 1fr; }
+  .vc-pane h3 { font-size: 32px; }
+  .vc-tabs button { padding: 11px 18px; font-size: 15px; }
   .split-card { padding: 30px 22px; }
   .split-card h2 { font-size: 30px; letter-spacing: -0.9px; }
   .split-card h3 { font-size: 26px; letter-spacing: -0.78px; }
@@ -978,8 +951,6 @@ a { text-decoration: none; }
   .brand-tile { height: 150px; padding: 16px; }
   .brand-logo { height: 64px; }
   .brand-logo img { width: calc(var(--w) * 0.72); }
-  .duo-card { height: 420px; padding: 22px; }
-  .duo-bottom h3 { font-size: 34px; letter-spacing: -1px; }
   .adv-grid { grid-template-columns: 1fr; }
   .adv-card { min-height: 0; padding: 24px; }
   .stats { gap: 10px; }
@@ -1359,35 +1330,28 @@ a { text-decoration: none; }
         <h2 class="section-title">Детейлинг и&nbsp;русификация</h2>
       </div>
     </div>
-    <div class="duo-grid">
-      <a href="https://grafit-service.ru/detailing" class="duo-card fade-up fade-up-delay-1">
-        <img src="assets/site/detailing.jpg" alt="Детейлинг автомобиля" loading="lazy">
-        <div class="chips">
-          <span class="chip">керамика и полировка</span>
-          <span class="chip">антикор арок</span>
-          <span class="chip">химчистка</span>
-          <span class="chip">шиномонтаж</span>
-          <span class="chip">шумоизоляция</span>
-          <span class="chip">оклейка кузова</span>
+    <div class="vc-panel fade-up fade-up-delay-1">
+      <div class="vc-left">
+        <div class="vc-tabs" id="vcTabs" role="tablist">
+          <span class="vc-pill"></span>
+          <button class="on" data-i="0" role="tab" aria-selected="true">Детейлинг</button>
+          <button data-i="1" role="tab" aria-selected="false">Русификация</button>
         </div>
-        <div class="duo-bottom">
+        <div class="vc-pane on">
           <h3>Детейлинг</h3>
-          <img class="arrow-btn" src="assets/arrow-box.svg" alt="">
+          <div class="vc-chips"><span>керамика и полировка</span><span>антикор арок</span><span>химчистка</span><span>шиномонтаж</span><span>шумоизоляция</span><span>оклейка кузова</span></div>
+          <a class="vc-more" href="https://grafit-service.ru/detailing"><span class="arrow-sq"><svg viewBox="0 0 18 18" fill="none"><path d="M4 14L14 4M14 14V4H4" stroke="#fff" stroke-width="2" stroke-linecap="round"/></svg></span>Подробнее о детейлинге</a>
         </div>
-      </a>
-      <a href="https://grafit-service.ru/russification" class="duo-card fade-up fade-up-delay-2">
-        <img src="assets/site/russification.jpg" alt="Русификация автомобиля" loading="lazy">
-        <div class="chips">
-          <span class="chip">магазин приложений</span>
-          <span class="chip">помощь с мастер-аккаунтом</span>
-          <span class="chip">адаптивные приложения</span>
-          <span class="chip">сим-карты</span>
-        </div>
-        <div class="duo-bottom">
+        <div class="vc-pane">
           <h3>Русификация</h3>
-          <img class="arrow-btn" src="assets/arrow-box.svg" alt="">
+          <div class="vc-chips"><span>магазин приложений</span><span>помощь с мастер-аккаунтом</span><span>адаптивные приложения</span><span>сим-карты</span></div>
+          <a class="vc-more" href="https://grafit-service.ru/russification"><span class="arrow-sq"><svg viewBox="0 0 18 18" fill="none"><path d="M4 14L14 4M14 14V4H4" stroke="#fff" stroke-width="2" stroke-linecap="round"/></svg></span>Подробнее о русификации</a>
         </div>
-      </a>
+      </div>
+      <div class="vc-photos">
+        <img class="on" src="assets/site/detailing.jpg" alt="Детейлинг автомобиля" loading="lazy">
+        <img src="assets/site/russification.jpg" alt="Русификация автомобиля" loading="lazy">
+      </div>
     </div>
   </section>
 
@@ -1715,6 +1679,24 @@ form.addEventListener('submit', function(e) {
   if (!consent.checked) ok = false;
   if (ok) form.classList.add('sent');
 });
+
+  (function(){
+    var tabs=document.getElementById('vcTabs'); if(!tabs) return;
+    var btns=tabs.querySelectorAll('button'),pill=tabs.querySelector('.vc-pill');
+    var panes=document.querySelectorAll('.vc-pane'),imgs=document.querySelectorAll('.vc-photos img');
+    function place(b){pill.style.left=b.offsetLeft+'px';pill.style.width=b.offsetWidth+'px'}
+    btns.forEach(function(b){b.addEventListener('click',function(){
+      var i=+b.dataset.i;
+      btns.forEach(function(x){x.classList.toggle('on',x===b);x.setAttribute('aria-selected',x===b)});
+      panes.forEach(function(p,j){p.classList.toggle('on',j===i)});
+      imgs.forEach(function(m,j){m.classList.toggle('on',j===i)});
+      place(b);
+    })});
+    function re(){place(tabs.querySelector('.on'))}
+    window.addEventListener('load',function(){re();imgs.forEach(function(m){m.loading='eager'})});
+    window.addEventListener('resize',re); re();
+    if(document.fonts) document.fonts.ready.then(re);
+  })();
 </script>
 </body>
 </html>
