@@ -642,14 +642,10 @@ a { text-decoration: none; }
   background: #fff;
   border-radius: 16px;
   padding: 30px;
-  display: grid;
-  grid-row: span 3;
-  grid-template-rows: subgrid;
-  row-gap: 0;
-  align-content: start;
+  display: flex;
+  flex-direction: column;
   transition: transform 0.3s, box-shadow 0.3s;
 }
-.adv-card > div:not(.adv-icon) { display: contents; }
 .adv-card:hover { transform: translateY(-4px); box-shadow: 0 14px 34px rgba(0,0,0,0.06); }
 .adv-icon {
   width: 56px;
@@ -693,7 +689,7 @@ a { text-decoration: none; }
 .stat b {
   font-size: 56px;
   font-weight: 500;
-  color: #1e1e1e;
+  color: #fc8535;
   letter-spacing: -2.2px;
   line-height: 1;
 }
