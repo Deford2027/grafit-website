@@ -5,6 +5,7 @@
 <meta name="viewport" content="width=device-width, initial-scale=1.0">
 <title>GRAFIT — Сервис, русификация и ремонт китайских автомобилей</title>
 <link rel="stylesheet" href="https://fonts.googleapis.com/css2?family=Inter:wght@400;500;600;700;800&display=swap">
+<link rel="stylesheet" href="https://cdnjs.cloudflare.com/ajax/libs/leaflet/1.9.4/leaflet.min.css">
 <style>
 * { margin: 0; padding: 0; box-sizing: border-box; }
 body {
@@ -809,6 +810,23 @@ a { text-decoration: none; }
 .form-success { display: none; flex-direction: column; gap: 10px; padding: 30px; border-radius: 12px; background: #fff2e9; }
 .form-success strong { font-size: 26px; font-weight: 500; letter-spacing: -0.78px; color: #1e1e1e; }
 .form-success span { font-size: 15px; color: rgba(40,40,40,0.7); line-height: 1.5; }
+/* dark-grey form card */
+.form-card { background: #2a2c30; color: #fff; }
+.form-card h2 { color: #fff; }
+.form-card > p { color: rgba(255,255,255,0.62); }
+.form-card .field label { color: rgba(255,255,255,0.55); }
+.form-card .field input, .form-card .field select { background-color: #36393e; color: #fff; }
+.form-card .field select { background-image: url("data:image/svg+xml,%3Csvg xmlns='http://www.w3.org/2000/svg' width='16' height='16' viewBox='0 0 16 16' fill='none'%3E%3Cpath d='M4 6L8 10L12 6' stroke='%23ffffff' stroke-width='1.6' stroke-linejoin='round'/%3E%3C/svg%3E"); }
+.form-card .field select option { color: #1e1e1e; background: #fff; }
+.form-card .field select:invalid { color: rgba(255,255,255,0.4); }
+.form-card .field input::placeholder { color: rgba(255,255,255,0.4); }
+.form-card .field input:focus, .form-card .field select:focus { background-color: #3e4147; }
+.form-card .consent { color: rgba(255,255,255,0.55); }
+.form-card .consent a { color: #fff; }
+.form-card .form-note { color: rgba(255,255,255,0.45); }
+.form-card .form-success { background: rgba(252,133,53,0.12); }
+.form-card .form-success strong { color: #fff; }
+.form-card .form-success span { color: rgba(255,255,255,0.7); }
 .booking-form.sent > :not(.form-success) { display: none; }
 .booking-form.sent .form-success { display: flex; }
 .form-visual {
@@ -828,7 +846,7 @@ a { text-decoration: none; }
   position: absolute;
   inset: 0;
   z-index: -1;
-  background: linear-gradient(180deg, #1e1e1e 0%, #1e1e1e 22%, rgba(30,30,30,0) 52%);
+  background: linear-gradient(180deg, rgba(20,20,20,0.6) 0%, rgba(20,20,20,0) 30%, rgba(20,20,20,0) 75%, rgba(20,20,20,0.35) 100%);
 }
 .form-visual-chips { position: relative; display: flex; flex-wrap: wrap; gap: 8px; }
 .form-visual-chips span {
@@ -841,7 +859,7 @@ a { text-decoration: none; }
   font-size: 14px;
   color: #fff;
 }
-.form-car { position: absolute; left: 0; right: 0; bottom: 0; width: 100%; height: auto; max-width: none; z-index: -2; transform-origin: 50% 100%; transform: scale(1.06); transition: transform 1.6s cubic-bezier(.2,.7,.2,1); }
+.form-car { position: absolute; inset: 0; width: 100%; height: 100%; max-width: none; object-fit: cover; object-position: 12% 70%; z-index: -2; transform: scale(1.06); transition: transform 1.6s cubic-bezier(.2,.7,.2,1); }
 .form-panel.visible .form-car { transform: none; }
 .form-visual:hover .form-car { transform: scale(1.03); }
 @keyframes carDriveIn { from { transform: translateX(-80px); opacity: 0; } to { transform: none; opacity: 1; } }
@@ -881,7 +899,16 @@ a { text-decoration: none; }
 .map-reset { position: absolute; left: 16px; bottom: 16px; border: 0; border-radius: 30px; background: #fc8535; color: #fff; font: 500 14px 'Inter', sans-serif; padding: 11px 18px; cursor: pointer; box-shadow: 0 6px 18px rgba(0,0,0,0.15); transition: background 0.3s; }
 .map-reset:hover { background: #e5751f; }
 .partners [data-ll].on-map { background: #fc8535; border-color: #fc8535; color: #fff; }
-.map-card iframe { width: 100%; height: 100%; min-height: 556px; border: 0; display: block; }
+.map-canvas { position: absolute; inset: 0; z-index: 0; background: #e4e7ec; font-family: 'Inter', sans-serif; }
+.map-canvas .leaflet-tile-pane { filter: grayscale(1) contrast(0.95); }
+.map-reset { z-index: 500; }
+.grafit-pin { width: 34px; height: 34px; border-radius: 50% 50% 50% 0; background: #fc8535; transform: rotate(-45deg); box-shadow: 0 6px 16px rgba(252,133,53,0.45); display: grid; place-items: center; border: 3px solid #fff; }
+.grafit-pin::after { content: ""; width: 8px; height: 8px; border-radius: 50%; background: #fff; }
+.grafit-pin.main { width: 44px; height: 44px; background: #1e1e1e; box-shadow: 0 8px 20px rgba(0,0,0,0.35); }
+.grafit-pin.main::after { background: #fc8535; width: 10px; height: 10px; }
+.map-canvas .leaflet-popup-content-wrapper { border-radius: 12px; box-shadow: 0 10px 30px rgba(0,0,0,0.15); }
+.map-canvas .leaflet-popup-content { margin: 14px 18px; font-size: 13px; line-height: 1.45; color: rgba(40,40,40,0.7); }
+.map-canvas .leaflet-popup-content b { display: block; font-size: 15px; font-weight: 600; color: #1e1e1e; margin-bottom: 4px; }
 
 /* ===== FOOTER ===== */
 .footer { padding: 20px 0 30px; }
@@ -972,7 +999,7 @@ a { text-decoration: none; }
   .stat b { font-size: 38px; letter-spacing: -1.4px; }
   .cases-track { grid-auto-columns: 86%; }
   .field-row { grid-template-columns: 1fr; }
-  .map-card, .map-card iframe { min-height: 360px; }
+  .map-card { min-height: 380px; }
   .footer-card { padding: 24px 20px; }
   .footer-top { flex-direction: column; align-items: flex-start; padding-bottom: 24px; }
   .footer-bottom { flex-direction: column; }
@@ -1500,7 +1527,7 @@ a { text-decoration: none; }
   <!-- BOOKING FORM -->
   <section class="section" id="contact">
     <div class="split form-panel fade-up">
-      <div class="split-card">
+      <div class="split-card form-card">
         <h2>Запишитесь в GRAFIT и&nbsp;получите отличный сервис</h2>
         <p>Заполните поля формы и мы перезвоним в течение 15 минут</p>
         <form class="booking-form" id="bookingForm" novalidate>
@@ -1577,7 +1604,7 @@ a { text-decoration: none; }
         </div>
       </div>
       <div class="map-card fade-up fade-up-delay-1">
-        <iframe id="grafitMap" src="https://yandex.ru/map-widget/v1/?ll=46.8%2C50.2&amp;z=4&amp;pt=37.652382%2C55.811351%2Cpm2orl~33.514778%2C44.568263%2Cpm2orm~47.603119%2C42.917163%2Cpm2orm~56.023514%2C54.750058%2Cpm2orm~38.989686%2C45.071548%2Cpm2orm~60.566285%2C56.85807%2Cpm2orm" title="Техцентры GRAFIT на карте" allowfullscreen></iframe>
+        <div id="grafitMap" class="map-canvas" role="region" aria-label="Техцентры GRAFIT на карте"></div>
         <button type="button" class="map-reset" id="mapReset" hidden>Все техцентры</button>
       </div>
     </div>
@@ -1713,23 +1740,53 @@ form.addEventListener('submit', function(e) {
     if(document.fonts) document.fonts.ready.then(re);
   })();
 
-  // Map: click on an address zooms the map to that tech center
+</script>
+<script src="https://cdnjs.cloudflare.com/ajax/libs/leaflet/1.9.4/leaflet.min.js"></script>
+<script>
+  // Map of GRAFIT tech centers (data from the old site); clicking an address flies to it
   (function(){
-    var map=document.getElementById('grafitMap'),reset=document.getElementById('mapReset');
-    if(!map) return;
-    var allSrc=map.src,links=document.querySelectorAll('#contacts [data-ll]');
+    var el=document.getElementById('grafitMap'),reset=document.getElementById('mapReset');
+    if(!el||!window.L) return;
+    var centers=[
+      {ll:[55.811351,37.652382],t:'GRAFIT, Москва, Маломосковская ул., 22, стр. 2',d:'Техцентр работает Пн-пт, с 10-00 до 20-00.',main:true},
+      {ll:[44.568263,33.514778],t:'GRAFIT, г. Севастополь, Промышленная, 9',d:'Техцентр работает Пн-пт, с 09-00 до 17-00.'},
+      {ll:[42.917163,47.603119],t:'GRAFIT, г. Махачкала, пр-т Насрутдинова, 252Б',d:'Техцентр работает Пн-пт, с 10-00 до 19-00.'},
+      {ll:[54.750058,56.023514],t:'GRAFIT, г. Уфа, 50 лет СССР, 39, корп.11',d:'Техцентр работает Пн-пт, с 09-00 до 20-00.'},
+      {ll:[45.071548,38.989686],t:'GRAFIT, г. Краснодар, Солнечная, 4Б',d:'Техцентр работает Пн-пт, с 10-00 до 20-00.'},
+      {ll:[56.85807,60.566285],t:'GRAFIT, г. Екатеринбург, ул. Черепанова, 23Б',d:'Техцентр работает Пн-пт, с 10-00 до 19-00.'}
+    ];
+    var map=L.map(el,{scrollWheelZoom:false,zoomControl:true,attributionControl:true});
+    L.tileLayer('https://{s}.basemaps.cartocdn.com/light_all/{z}/{x}/{y}{r}.png',{
+      maxZoom:19,subdomains:'abcd',attribution:'&copy; OpenStreetMap &copy; CARTO'
+    }).addTo(map);
+    var markers={},bounds=L.latLngBounds([]);
+    centers.forEach(function(c){
+      var size=c.main?44:34;
+      var icon=L.divIcon({className:'',html:'<div class="grafit-pin'+(c.main?' main':'')+'"></div>',iconSize:[size,size],iconAnchor:[size/2,size*1.2],popupAnchor:[0,-size*1.1]});
+      markers[c.ll.join(',')]=L.marker(c.ll,{icon:icon}).addTo(map).bindPopup('<b>'+c.t+'</b>'+c.d);
+      bounds.extend(c.ll);
+    });
+    function showAll(){map.fitBounds(bounds,{padding:[50,50]})}
+    showAll();
+    map.on('focus click',function(){map.scrollWheelZoom.enable()});
+    map.on('mouseout',function(){map.scrollWheelZoom.disable()});
+    var links=document.querySelectorAll('#contacts [data-ll]');
     links.forEach(function(a){a.addEventListener('click',function(e){
       if(e.metaKey||e.ctrlKey||e.shiftKey) return;
       e.preventDefault();
-      map.src=allSrc.replace(/ll=[^&]*/,'ll='+encodeURIComponent(a.dataset.ll)).replace(/z=\d+/,'z=15');
+      var p=a.dataset.ll.split(','),ll=[+p[1],+p[0]],m=markers[ll.join(',')];
+      map.flyTo(ll,15,{duration:1.2});
+      if(m) map.once('moveend',function(){m.openPopup()});
       links.forEach(function(x){x.classList.toggle('on-map',x===a)});
       reset.hidden=false;
-      if(window.innerWidth<=900) map.scrollIntoView({behavior:'smooth',block:'center'});
+      if(window.innerWidth<=900) el.scrollIntoView({behavior:'smooth',block:'center'});
     })});
     reset.addEventListener('click',function(){
-      map.src=allSrc; reset.hidden=true;
+      map.closePopup(); map.flyToBounds(bounds,{padding:[50,50],duration:1.2}); reset.hidden=true;
       links.forEach(function(x){x.classList.remove('on-map')});
     });
+    // section fades in: recompute size once visible
+    window.addEventListener('load',function(){map.invalidateSize();showAll()});
   })();
 </script>
 </body>
