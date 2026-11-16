@@ -642,13 +642,14 @@ a { text-decoration: none; }
   background: #fff;
   border-radius: 16px;
   padding: 30px;
-  min-height: 330px;
-  display: flex;
-  flex-direction: column;
-  justify-content: space-between;
-  gap: 40px;
+  display: grid;
+  grid-row: span 3;
+  grid-template-rows: subgrid;
+  row-gap: 0;
+  align-content: start;
   transition: transform 0.3s, box-shadow 0.3s;
 }
+.adv-card > div:not(.adv-icon) { display: contents; }
 .adv-card:hover { transform: translateY(-4px); box-shadow: 0 14px 34px rgba(0,0,0,0.06); }
 .adv-icon {
   width: 56px;
@@ -659,6 +660,7 @@ a { text-decoration: none; }
   display: flex;
   align-items: center;
   justify-content: center;
+  margin-bottom: 90px;
   transition: background 0.3s, color 0.3s;
 }
 .adv-card:hover .adv-icon { background: #fc8535; color: #fff; }
@@ -952,7 +954,8 @@ a { text-decoration: none; }
   .brand-logo { height: 64px; }
   .brand-logo img { width: calc(var(--w) * 0.72); }
   .adv-grid { grid-template-columns: 1fr; }
-  .adv-card { min-height: 0; padding: 24px; }
+  .adv-card { padding: 24px; }
+  .adv-icon { margin-bottom: 40px; }
   .stats { gap: 10px; }
   .stat { padding: 20px; }
   .stat b { font-size: 38px; letter-spacing: -1.4px; }
