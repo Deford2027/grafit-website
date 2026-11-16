@@ -1,11 +1,11 @@
 /* ===== MODEL PAGE (ZEEKR 001 etc.) — extends main.css ===== */
 
 /* hero */
-.hero--model .hero-bg img { object-position: 50% 62%; }
+.hero--model .hero-bg img { object-position: 100% 55%; }
 .hero--model .hero-overlay {
   background:
-    linear-gradient(90deg, rgba(0,0,0,0.82) 0%, rgba(0,0,0,0.55) 45%, rgba(0,0,0,0.1) 100%),
-    linear-gradient(0deg, rgba(0,0,0,0.55) 0%, rgba(0,0,0,0) 40%);
+    linear-gradient(90deg, rgba(0,0,0,0.75) 0%, rgba(0,0,0,0.45) 40%, rgba(0,0,0,0) 65%),
+    linear-gradient(0deg, rgba(0,0,0,0.5) 0%, rgba(0,0,0,0) 35%);
 }
 .hero--model .hero-content { padding-top: 70px; }
 .hero--model .hero-title { max-width: 720px; }
@@ -17,8 +17,8 @@
 .hero-points {
   list-style: none;
   display: grid;
-  grid-template-columns: repeat(2, max-content);
-  gap: 12px 40px;
+  grid-template-columns: 1fr;
+  gap: 10px;
   margin: 6px 0 40px;
 }
 .hero-points li {
@@ -248,6 +248,6 @@
   .model-card h3 { font-size: 24px; }
   .model-card .model-top img { display: none; }
   .model-card .model-bottom { font-size: 13px; }
-  .hero--model .hero-bg img { object-position: 62% 100%; transform: scale(1.45); transform-origin: 62% 100%; }
+  .hero--model .hero-bg img { object-position: 64% 50%; }
   .hero--model .hero-overlay { background: linear-gradient(180deg, rgba(0,0,0,0.75) 0%, rgba(0,0,0,0.6) 60%, rgba(0,0,0,0.75) 100%); }
 }
