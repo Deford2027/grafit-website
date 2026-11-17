@@ -288,3 +288,10 @@
   .reviews-stat span { font-size: 15px; }
   .model-card h3 { font-size: 20px; }
 }
+
+/* mobile: dedicated vertical hero photo */
+@media (max-width: 900px) {
+  .hero--model .hero-bg { top: 0; height: 100%; }
+  .hero--model .hero-bg img { object-position: 50% 100%; transform: none; }
+  .hero--model .hero-overlay { background: linear-gradient(180deg, rgba(0,0,0,0.5) 0%, rgba(0,0,0,0.3) 45%, rgba(0,0,0,0) 60%); }
+}
