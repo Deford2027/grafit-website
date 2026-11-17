@@ -1267,3 +1267,8 @@ a { text-decoration: none; }
   .services-section { padding-top: 80px; }
   .section-head { margin-bottom: 28px; }
 }
+
+/* mobile: services block — photo first, then the list card */
+@media (max-width: 900px) {
+  #services .to-photos { order: -1; }
+}
