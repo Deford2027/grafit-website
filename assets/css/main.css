@@ -1289,3 +1289,23 @@ a { text-decoration: none; }
 @media (max-width: 900px) {
   #brands .section-head .btn-primary { display: none; }
 }
+
+/* mobile: advantages as an equal-height horizontal swipe row */
+@media (max-width: 900px) {
+  .adv-grid {
+    display: grid;
+    grid-template-columns: none;
+    grid-auto-flow: column;
+    grid-auto-columns: 78%;
+    gap: 10px;
+    overflow-x: auto;
+    scroll-snap-type: x mandatory;
+    scrollbar-width: none;
+    margin: 0 -16px;
+    padding: 0 16px 4px;
+    scroll-padding-left: 16px;
+  }
+  .adv-grid::-webkit-scrollbar { display: none; }
+  .adv-card { scroll-snap-align: start; height: 100%; }
+  .adv-card:hover { transform: none; }
+}
