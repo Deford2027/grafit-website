@@ -1393,3 +1393,18 @@ html.modal-open, html.modal-open body { overflow: hidden; }
 @media (max-width: 900px) {
   .split-card p { font-size: 15px; line-height: 1.55; }
 }
+
+/* ===== MOBILE TYPE SCALE (unified) =====
+   H1 34 · section H2 30 · panel H3 24 · card H3 20 · body 15 · buttons 15 · captions 13 */
+@media (max-width: 900px) {
+  .form-card h2 { font-size: 30px; letter-spacing: -0.9px; }
+  .vc-pane h3, .split-card h3 { font-size: 24px; letter-spacing: -0.7px; }
+  .case-card h3 { font-size: 20px; letter-spacing: -0.5px; }
+  .case-card p, .case-card li { font-size: 15px; }
+  .check-list li { font-size: 15px; }
+  .cta-left p { font-size: 15px; }
+  .vc-more { font-size: 15px; }
+  .btn-primary { font-size: 15px; }
+  .form-note { font-size: 13px; }
+  .contact-line a, .contact-line span { font-size: 15px; }
+}

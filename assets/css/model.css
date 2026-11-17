@@ -275,3 +275,16 @@
   .model-card .model-top { flex-direction: column; gap: 8px; }
   .model-card h3 { font-size: 22px; }
 }
+
+/* ===== MOBILE TYPE SCALE (unified, model page) ===== */
+@media (max-width: 900px) {
+  .section-lead { font-size: 15px; }
+  .svc-card h3, .price-card h3 { font-size: 20px; letter-spacing: -0.5px; }
+  .svc-card p { font-size: 15px; }
+  .deal-card h3 { font-size: 22px; }
+  .info-panel .vc-pane h3 { font-size: 24px; }
+  .faq-item summary { font-size: 16px; }
+  .reviews-stat b { font-size: 40px; }
+  .reviews-stat span { font-size: 15px; }
+  .model-card h3 { font-size: 20px; }
+}
