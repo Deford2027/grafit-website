@@ -1383,3 +1383,8 @@ html.modal-open, html.modal-open body { overflow: hidden; }
   .modal-title { font-size: 26px; }
   .modal-box .field-row { grid-template-columns: 1fr; }
 }
+
+/* mobile: smaller lead in "О нас" */
+@media (max-width: 900px) {
+  .split-lead { font-size: 17px !important; line-height: 1.45 !important; margin-bottom: 16px; }
+}
