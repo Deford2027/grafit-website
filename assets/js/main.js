@@ -56,28 +56,82 @@ window.addEventListener('load', function() {
   toImgs.forEach(function(img) { img.loading = 'eager'; });
 });
 
-var brandSelect = document.getElementById('fBrand');
-document.querySelectorAll('.brand-tile').forEach(function(tile) {
-  tile.addEventListener('click', function() {
-    if (brandSelect) brandSelect.value = tile.dataset.brand;
+// Booking form validation (works for the page form and the popup copy)
+function bindBookingForm(form) {
+  form.addEventListener('submit', function(e) {
+    e.preventDefault();
+    var phone = form.querySelector('input[type="tel"]');
+    var brand = form.querySelector('select');
+    var consent = form.querySelector('input[type="checkbox"]');
+    var ok = true;
+    [phone, brand].forEach(function(el) {
+      var bad = el === phone ? phone.value.replace(/\D/g, '').length < 10 : !el.value;
+      el.style.borderColor = bad ? '#fc8535' : '';
+      if (bad) ok = false;
+    });
+    consent.parentElement.style.color = consent.checked ? '' : '#fc8535';
+    if (!consent.checked) ok = false;
+    if (ok) form.classList.add('sent');
   });
-});
-
+}
 var form = document.getElementById('bookingForm');
-if (form) form.addEventListener('submit', function(e) {
-  e.preventDefault();
-  var phone = document.getElementById('fPhone');
-  var consent = document.getElementById('fConsent');
-  var ok = true;
-  [phone, brandSelect].forEach(function(el) {
-    var bad = el === phone ? phone.value.replace(/\D/g, '').length < 10 : !el.value;
-    el.style.borderColor = bad ? '#fc8535' : '';
-    if (bad) ok = false;
+if (form) bindBookingForm(form);
+
+// Booking popup: every link to #contact opens it instead of scrolling down
+(function() {
+  if (!form) return;
+  var card = form.closest('.form-card');
+  var modal = document.createElement('div');
+  modal.className = 'modal';
+  modal.id = 'bookingModal';
+  modal.setAttribute('role', 'dialog');
+  modal.setAttribute('aria-modal', 'true');
+  modal.setAttribute('aria-label', 'Заявка на запись');
+  modal.hidden = true;
+  var box = document.createElement('div');
+  box.className = 'modal-box form-card';
+  box.innerHTML = '<button type="button" class="modal-close" aria-label="Закрыть"><svg width="20" height="20" viewBox="0 0 24 24" fill="none" stroke="currentColor" stroke-width="2" stroke-linecap="round"><path d="M18 6 6 18M6 6l12 12"/></svg></button>';
+  var h = card.querySelector('h2');
+  if (h) { var t = document.createElement('h2'); t.className = 'modal-title'; t.innerHTML = h.innerHTML; box.appendChild(t); }
+  card.querySelectorAll(':scope > p').forEach(function(p) { var c = p.cloneNode(true); c.className = 'modal-lead'; box.appendChild(c); });
+  var mform = form.cloneNode(true);
+  mform.id = 'bookingFormModal';
+  mform.classList.remove('sent');
+  mform.querySelectorAll('[id]').forEach(function(el) { el.id = 'm' + el.id; });
+  mform.querySelectorAll('label[for]').forEach(function(l) { l.htmlFor = 'm' + l.htmlFor; });
+  box.appendChild(mform);
+  modal.appendChild(box);
+  document.body.appendChild(modal);
+  bindBookingForm(mform);
+  var msel = mform.querySelector('select');
+  var lastFocus = null;
+
+  function open(brand) {
+    lastFocus = document.activeElement;
+    mform.classList.remove('sent');
+    if (brand && msel) msel.value = brand;
+    var nav = document.getElementById('mobileNav');
+    if (nav) nav.classList.remove('open');
+    modal.hidden = false;
+    document.documentElement.classList.add('modal-open');
+    requestAnimationFrame(function() { modal.classList.add('show'); });
+    setTimeout(function() { var i = mform.querySelector('input[type="tel"]'); if (i) i.focus({ preventScroll: true }); }, 250);
+  }
+  function close() {
+    modal.classList.remove('show');
+    document.documentElement.classList.remove('modal-open');
+    setTimeout(function() { modal.hidden = true; }, 300);
+    if (lastFocus) lastFocus.focus({ preventScroll: true });
+  }
+  document.addEventListener('click', function(e) {
+    var a = e.target.closest('a[href="#contact"]');
+    if (!a) return;
+    e.preventDefault();
+    open(a.dataset.brand);
   });
-  consent.parentElement.style.color = consent.checked ? '' : '#fc8535';
-  if (!consent.checked) ok = false;
-  if (ok) form.classList.add('sent');
-});
+  modal.addEventListener('click', function(e) { if (e.target === modal || e.target.closest('.modal-close')) close(); });
+  document.addEventListener('keydown', function(e) { if (e.key === 'Escape' && !modal.hidden) close(); });
+})();
 
   (function(){
     var tabs=document.getElementById('vcTabs'); if(!tabs) return;
