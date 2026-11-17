@@ -1408,3 +1408,6 @@ html.modal-open, html.modal-open body { overflow: hidden; }
   .form-note { font-size: 13px; }
   .contact-line a, .contact-line span { font-size: 15px; }
 }
+
+/* iOS auto-detected links (prices, dates): keep page colors */
+a[x-apple-data-detectors], a[href^="tel:"]:not([class]) { color: inherit !important; text-decoration: none !important; }
