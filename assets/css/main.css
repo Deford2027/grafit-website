@@ -1260,3 +1260,10 @@ a { text-decoration: none; }
   .hero-title { font-size: min(34px, 8.7vw); letter-spacing: -1px; line-height: 1.08; }
   .hero-subtitle { font-size: 15px; }
 }
+
+/* mobile: more space between sections */
+@media (max-width: 900px) {
+  .section { padding-top: 96px; }
+  .services-section { padding-top: 80px; }
+  .section-head { margin-bottom: 28px; }
+}
