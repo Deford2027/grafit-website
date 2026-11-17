@@ -192,3 +192,14 @@ if (form) bindBookingForm(form);
     });
     window.addEventListener('load',function(){map.container.fitToViewport();showAll()});
   });
+
+// FAQ: only one answer open at a time (accordion)
+(function() {
+  var items = document.querySelectorAll('.faq-item');
+  items.forEach(function(d) {
+    d.addEventListener('toggle', function() {
+      if (!d.open) return;
+      items.forEach(function(o) { if (o !== d && o.open) o.open = false; });
+    });
+  });
+})();
