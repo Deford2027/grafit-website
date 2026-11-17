@@ -1388,3 +1388,8 @@ html.modal-open, html.modal-open body { overflow: hidden; }
 @media (max-width: 900px) {
   .split-lead { font-size: 17px !important; line-height: 1.45 !important; margin-bottom: 16px; }
 }
+
+/* mobile: body text in text cards in line with the rest of the page */
+@media (max-width: 900px) {
+  .split-card p { font-size: 15px; line-height: 1.55; }
+}
