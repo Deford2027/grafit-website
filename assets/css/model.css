@@ -320,3 +320,12 @@
   .svc-card, .svc-card.wide { grid-column: auto; scroll-snap-align: start; height: 100%; }
   .svc-card:hover { transform: none; box-shadow: none; }
 }
+
+/* FAQ smooth accordion: JS animates height; icon follows .is-open */
+.faq-answer { animation: none; overflow: hidden; }
+.faq-item[open] summary i { background: #f3f4f7; transform: none; }
+.faq-item[open] summary i::before, .faq-item[open] summary i::after { background: #282828; }
+.faq-item.is-open summary i { background: #fc8535; transform: rotate(45deg); }
+.faq-item.is-open summary i::before, .faq-item.is-open summary i::after { background: #fff; }
+.faq-item[open] { box-shadow: none; }
+.faq-item.is-open { box-shadow: 0 14px 34px rgba(0,0,0,0.05); }

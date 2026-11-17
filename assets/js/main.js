@@ -193,13 +193,34 @@ if (form) bindBookingForm(form);
     window.addEventListener('load',function(){map.container.fitToViewport();showAll()});
   });
 
-// FAQ: only one answer open at a time (accordion)
+// FAQ: smooth accordion, one answer open at a time
 (function() {
-  var items = document.querySelectorAll('.faq-item');
+  var items = Array.prototype.slice.call(document.querySelectorAll('.faq-item'));
+  if (!items.length) return;
+  var ease = 'cubic-bezier(.2,.7,.2,1)', dur = 420;
+  function animate(d, opening) {
+    var ans = d.querySelector('.faq-answer');
+    if (!ans || !ans.animate) { d.open = opening; return; }
+    if (d._anim) d._anim.cancel();
+    if (opening) d.open = true;
+    var h = ans.scrollHeight;
+    var a = ans.animate(
+      opening ? [{ height: '0px', opacity: 0 }, { height: h + 'px', opacity: 1 }]
+              : [{ height: h + 'px', opacity: 1 }, { height: '0px', opacity: 0 }],
+      { duration: dur, easing: ease });
+    d._anim = a;
+    d.classList.toggle('is-open', opening);
+    function done() { if (d._anim !== a) return; d._anim = null; if (!opening && !d.classList.contains('is-open')) d.open = false; }
+    a.onfinish = done;
+    setTimeout(done, dur + 60);
+  }
   items.forEach(function(d) {
-    d.addEventListener('toggle', function() {
-      if (!d.open) return;
-      items.forEach(function(o) { if (o !== d && o.open) o.open = false; });
+    d.classList.toggle('is-open', d.open);
+    d.querySelector('summary').addEventListener('click', function(e) {
+      e.preventDefault();
+      var opening = !d.classList.contains('is-open');
+      if (opening) items.forEach(function(o) { if (o !== d && o.classList.contains('is-open')) animate(o, false); });
+      animate(d, opening);
     });
   });
 })();
