@@ -251,3 +251,25 @@
   .hero--model .hero-bg img { object-position: 64% 50%; }
   .hero--model .hero-overlay { background: linear-gradient(180deg, rgba(0,0,0,0.75) 0%, rgba(0,0,0,0.6) 60%, rgba(0,0,0,0.75) 100%); }
 }
+
+/* ===== MOBILE POLISH (≤900px) ===== */
+@media (max-width: 900px) {
+  .info-panel .vc-tabs { flex-wrap: wrap; overflow: visible; }
+  .info-panel .vc-tabs button { padding: 10px 14px; font-size: 14px; }
+  .info-panel .vc-pane h3 { font-size: 24px; }
+  .info-panel .vc-pane p, .info-list li { font-size: 15px; }
+  .crumbs { margin-bottom: 18px; }
+  .hero--model .hero-content { padding-top: 32px; }
+  .svc-card h3 { font-size: 21px; }
+  .svc-price b { font-size: 26px; }
+  .price-card h3 { font-size: 22px; }
+  .deal-card h3 { font-size: 23px; }
+  .deal-prices { margin: 20px 0; }
+  .faq-side .faq-phone { font-size: 22px; }
+  .reviews-stat b { font-size: 44px; }
+  .review-shot { height: 380px; }
+  .model-card .arrow-sq { display: none; }
+  .model-card .model-bottom span { white-space: nowrap; }
+  .model-card .model-top { flex-direction: column; gap: 8px; }
+  .model-card h3 { font-size: 22px; }
+}

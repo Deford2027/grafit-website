@@ -613,7 +613,7 @@ a { text-decoration: none; }
 .vc-tabs button{position:relative;z-index:1;border:0;background:none;font:500 16px 'Inter',sans-serif;padding:12px 24px;border-radius:40px;cursor:pointer;color:#1e1e1e;transition:color .4s;outline:none;-webkit-tap-highlight-color:transparent}
 .vc-tabs button:focus-visible{box-shadow:0 0 0 2px rgba(252,133,53,.45)}
 .vc-tabs button.on{color:#fff}
-.vc-pill{position:absolute;top:5px;bottom:5px;left:5px;border-radius:40px;background:#fc8535;transition:left .45s cubic-bezier(.2,.7,.2,1),width .45s cubic-bezier(.2,.7,.2,1)}
+.vc-pill{position:absolute;top:5px;bottom:5px;left:5px;border-radius:40px;background:#fc8535;transition:left .45s cubic-bezier(.2,.7,.2,1),width .45s cubic-bezier(.2,.7,.2,1),top .45s cubic-bezier(.2,.7,.2,1)}
 .vc-pane{display:none;flex-direction:column;flex:1;margin-top:40px;animation:vcIn .5s ease}
 .vc-pane.on{display:flex}
 @keyframes vcIn{from{opacity:0;transform:translateY(12px)}to{opacity:1;transform:none}}
@@ -1135,4 +1135,56 @@ a { text-decoration: none; }
     animation-duration: 0.01ms !important;
     transition-duration: 0.01ms !important;
   }
+}
+
+/* ===== MOBILE POLISH (≤900px) ===== */
+@media (max-width: 900px) {
+  /* hero feature cards: compact rows instead of tall tiles */
+  .features-strip { gap: 8px; padding-bottom: 24px; }
+  .feature-card { height: auto; padding: 18px 20px 18px 40px; justify-content: flex-start; }
+  .feature-dot { top: 27px; left: 20px; }
+  .feature-card h3 { font-size: 22px; letter-spacing: -0.8px; margin-bottom: 4px; }
+  .feature-card p { font-size: 14px; }
+  .hero-content { padding: 56px 0 32px; }
+  .hero-subtitle { margin-bottom: 28px; }
+
+  /* text cards */
+  .split-card h3 { font-size: 24px; letter-spacing: -0.7px; margin-bottom: 16px; }
+  .split-card .btn-primary { margin-top: 28px; }
+  .split-photo { min-height: 260px; }
+
+  /* brands: 3 compact columns */
+  .brands-grid { grid-template-columns: repeat(3, 1fr); gap: 8px; }
+  .brand-tile { height: 104px; padding: 12px; border-radius: 12px; }
+  .brand-name { font-size: 13px; }
+  .brand-logo { height: 46px; }
+  .brand-logo img { width: calc(var(--w) * 0.6); }
+
+  /* detailing tabs: chips as wrapping pills */
+  .vc-chips { display: flex; flex-wrap: wrap; gap: 8px; }
+  .vc-chips span { padding: 10px 14px; border-radius: 30px; font-size: 14px; }
+  .vc-pane { margin-top: 26px; }
+  .vc-pane h3 { font-size: 28px; margin-bottom: 18px; }
+  .vc-tabs { flex-wrap: wrap; border-radius: 22px; }
+  .vc-tabs button { padding: 10px 16px; font-size: 14px; }
+  .vc-photos { min-height: 220px; }
+
+  /* advantages */
+  .adv-card { padding: 22px; }
+  .adv-icon { width: 48px; height: 48px; margin-bottom: 20px; }
+  .adv-card h3 { font-size: 20px; }
+
+  /* stats: keep "12 мес." on one line */
+  .stat { padding: 18px; }
+  .stat b { font-size: 34px; letter-spacing: -1.2px; white-space: nowrap; }
+  .stat small { font-size: 13px; }
+
+  /* form */
+  .form-card h2 { font-size: 28px; }
+  .form-visual { min-height: 260px; }
+
+  /* contacts */
+  .contact-line .big { font-size: 26px; }
+  .contact-line a, .contact-line span { font-size: 16px; }
+  .partners a { font-size: 13px; }
 }

@@ -83,7 +83,7 @@ if (form) form.addEventListener('submit', function(e) {
     var tabs=document.getElementById('vcTabs'); if(!tabs) return;
     var btns=tabs.querySelectorAll('button'),pill=tabs.querySelector('.vc-pill');
     var panes=document.querySelectorAll('.vc-pane'),imgs=document.querySelectorAll('.vc-photos img');
-    function place(b){pill.style.left=b.offsetLeft+'px';pill.style.width=b.offsetWidth+'px'}
+    function place(b){pill.style.left=b.offsetLeft+'px';pill.style.width=b.offsetWidth+'px';pill.style.top=b.offsetTop+'px';pill.style.height=b.offsetHeight+'px';pill.style.bottom='auto'}
     btns.forEach(function(b){b.addEventListener('click',function(){
       var i=+b.dataset.i;
       btns.forEach(function(x){x.classList.toggle('on',x===b);x.setAttribute('aria-selected',x===b)});
