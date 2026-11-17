@@ -295,3 +295,8 @@
   .hero--model .hero-bg img { object-position: 50% 100%; transform: none; }
   .hero--model .hero-overlay { background: linear-gradient(180deg, rgba(0,0,0,0.5) 0%, rgba(0,0,0,0.3) 45%, rgba(0,0,0,0) 60%); }
 }
+
+/* mobile: reserve room under the button so the car (lower ~40% of the photo) never sits under text */
+@media (max-width: 900px) {
+  .hero--model .hero-content { padding-bottom: calc(86vw - 150px); }
+}
