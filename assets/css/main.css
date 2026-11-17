@@ -1314,3 +1314,8 @@ a { text-decoration: none; }
 @media (max-width: 900px) {
   .form-visual { display: none; }
 }
+
+/* mobile: map above the contacts card */
+@media (max-width: 900px) {
+  #contacts .map-card { order: -1; }
+}
