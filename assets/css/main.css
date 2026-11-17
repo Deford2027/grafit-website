@@ -1411,3 +1411,8 @@ html.modal-open, html.modal-open body { overflow: hidden; }
 
 /* iOS auto-detected links (prices, dates): keep page colors */
 a[x-apple-data-detectors], a[href^="tel:"]:not([class]) { color: inherit !important; text-decoration: none !important; }
+
+/* desktop 1201–1440: keep hero/header off the screen edges (same 50px gutter as .container) */
+@media (min-width: 1201px) {
+  .header, .hero-content, .features-strip { max-width: min(1340px, calc(100% - 100px)); }
+}
