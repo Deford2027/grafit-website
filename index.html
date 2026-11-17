@@ -5,7 +5,7 @@
 <meta name="viewport" content="width=device-width, initial-scale=1.0">
 <title>GRAFIT — Сервис, русификация и ремонт китайских автомобилей</title>
 <link rel="stylesheet" href="https://fonts.googleapis.com/css2?family=Inter:wght@400;500;600;700;800&display=swap">
-<link rel="stylesheet" href="assets/css/main.css?v=9">
+<link rel="stylesheet" href="assets/css/main.css?v=11">
 </head>
 <body>
 
@@ -34,7 +34,10 @@
 <!-- HERO SECTION (header + text + feature cards — all over the same bg photo) -->
 <section class="hero">
   <div class="hero-bg">
-    <img src="assets/hero-bg.png" alt="">
+    <picture>
+      <source media="(max-width: 900px)" srcset="assets/hero-mobile.jpg">
+      <img src="assets/hero-bg.png" alt="">
+    </picture>
   </div>
   <div class="hero-overlay"></div>
 
