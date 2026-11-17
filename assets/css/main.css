@@ -1309,3 +1309,8 @@ a { text-decoration: none; }
   .adv-card { scroll-snap-align: start; height: 100%; }
   .adv-card:hover { transform: none; }
 }
+
+/* mobile: hide booking photo panel (with its chips) */
+@media (max-width: 900px) {
+  .form-visual { display: none; }
+}
