@@ -1213,6 +1213,21 @@ a { text-decoration: none; }
 
   .hero-bg img { object-position: 84% 100%; }
   .hero-overlay { background: linear-gradient(180deg, rgba(0,0,0,0.85) 0%, rgba(0,0,0,0.7) 38%, rgba(0,0,0,0.15) 62%, rgba(0,0,0,0) 100%); }
-  .hero-content { padding: 44px 0 340px; }
-  .features-strip { display: none; }
+  .hero-content { padding: 44px 0 300px; }
+  .features-strip {
+    display: grid;
+    grid-auto-flow: column;
+    grid-template-columns: none;
+    grid-auto-columns: 74%;
+    gap: 8px;
+    overflow-x: auto;
+    scroll-snap-type: x mandatory;
+    scrollbar-width: none;
+    max-width: none;
+    margin: 0;
+    padding: 0 16px 20px;
+    scroll-padding-left: 16px;
+  }
+  .features-strip::-webkit-scrollbar { display: none; }
+  .feature-card { scroll-snap-align: start; border-radius: 12px; background: rgba(15,15,15,0.55); }
 }

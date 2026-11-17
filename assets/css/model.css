@@ -249,9 +249,9 @@
   .model-card .model-top img { display: none; }
   .model-card .model-bottom { font-size: 13px; }
   .hero--model { background: #0b0b0b; }
-  .hero--model .hero-bg { top: auto; height: 440px; }
-  .hero--model .hero-bg img { object-position: 96% 60%; }
-  .hero--model .hero-overlay { background: linear-gradient(180deg, #0b0b0b 0%, #0b0b0b 48%, rgba(11,11,11,0) 66%); }
+  .hero--model .hero-bg { top: auto; height: 560px; }
+  .hero--model .hero-bg img { object-position: 96% 45%; }
+  .hero--model .hero-overlay { background: linear-gradient(180deg, #0b0b0b 0%, #0b0b0b 42%, rgba(11,11,11,0) 58%); }
 }
 
 /* ===== MOBILE POLISH (≤900px) ===== */
@@ -261,7 +261,7 @@
   .info-panel .vc-pane h3 { font-size: 24px; }
   .info-panel .vc-pane p, .info-list li { font-size: 15px; }
   .crumbs { margin-bottom: 18px; }
-  .hero--model .hero-content { padding-top: 32px; padding-bottom: 290px; }
+  .hero--model .hero-content { padding-top: 32px; padding-bottom: 270px; }
   .svc-card h3 { font-size: 21px; }
   .svc-price b { font-size: 26px; }
   .price-card h3 { font-size: 22px; }
